@@ -24,6 +24,18 @@ query PostById($id: String) {
     title
     id
     uri
+    contributors {
+      contributorBio
+      featuredIn {
+        ... on WpPage {
+          id
+          title
+          uri
+        }
+      }
+      fieldGroupName
+    }
+    databaseId
   }
 }
 
