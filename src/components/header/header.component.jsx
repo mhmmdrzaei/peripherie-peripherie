@@ -31,16 +31,8 @@ const Header = ()=> {
 	  <Link to="/">
 	     <h1>{headerData.site.siteMetadata.title}</h1>
 	  </Link>
-	  <menu>
-	  {
-	  	headerData.wpMenu.menuItems.nodes.map(({id, uri, label}) => (
-	  		<Link to={uri} key={id}>{label} </Link>
-	  		)
-	  		
-	  	)
-	  } 
-	  	
-	  </menu>
+	  <Link to="address/contributors">Contributors</Link>
+	
 	   
 	  </header>
 )

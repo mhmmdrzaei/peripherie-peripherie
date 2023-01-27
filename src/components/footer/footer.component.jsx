@@ -18,7 +18,7 @@ const Footer = ()=>{
 		<span>
 		© {new Date().getFullYear()} 
           {` `}
-          {footerData.site.siteMetadata?.title}</span>
+          {footerData.site.siteMetadata?.title}, a Peripheral Review Project.</span>
 		</footer>
 		)
 }

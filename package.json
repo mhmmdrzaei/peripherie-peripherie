@@ -18,6 +18,7 @@
   "dependencies": {
     "@mdx-js/react": "^2.2.1",
     "gatsby": "^5.4.2",
+    "gatsby-plugin-catch-links": "^5.5.0",
     "gatsby-plugin-google-analytics": "^5.4.0",
     "gatsby-plugin-image": "^3.4.0",
     "gatsby-plugin-manifest": "^5.4.0",
