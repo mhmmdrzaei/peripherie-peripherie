@@ -1,9 +1,10 @@
 import * as React from "react";
 import { useStaticQuery, graphql, Link } from "gatsby";
+import { useState} from "react"
 
 
 
-const Header = ()=> {
+const Header = ({currentSection})=> {
 
 
 	const headerData = useStaticQuery(graphql`
@@ -28,10 +29,12 @@ const Header = ()=> {
 
 	return (
 	  <header>
+		            
+
 	  <Link to="/">
 	     <h1>{headerData.site.siteMetadata.title}</h1>
 	  </Link>
-	  <Link to="address/contributors">Contributors</Link>
+	  <Link to="#contributors" onClick={() => currentSection("contributors")} >Contributors</Link>
 	
 	   
 	  </header>
