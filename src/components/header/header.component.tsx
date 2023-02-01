@@ -27,17 +27,13 @@ const Header = () => {
 	return (
 		<header>
 		<nav>
-		  <ul>
-			<li>
-			  <Link to="/">Home</Link>
-			</li>
-			<li>
+			  <Link to="/"> <h1>{headerData.site.siteMetadata.title}</h1></Link>
+			  <a href="https://www.peripheralreview.com/">Peripheral Review</a>
+
 			  <Link to="/#contributors">Contributors</Link>
-			</li>
-			<li>
+
 			  <Link to="/#issues">Issues</Link>
-			</li>
-		  </ul>
+
 		</nav>
 	  </header>
 
