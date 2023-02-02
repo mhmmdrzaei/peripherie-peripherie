@@ -8,7 +8,7 @@ const PagePageTemplate = ({ data }) => {
   const { wpPage } = data;
   const pageLayout =()=> {
    if(wpPage.id ==='cG9zdDo3MA==') {
-      return (<HomePage />)
+      return (<HomePage data={wpPage}/>)
     } else return (
       <>
       <h1>{wpPage.title}</h1>

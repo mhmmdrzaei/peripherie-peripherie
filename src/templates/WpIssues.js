@@ -4,21 +4,21 @@ import {graphql} from "gatsby";
 import Layout from '../components/layout/layout.component'
 import HomePage from '../components/homePage/homePage.component'
 
-const PagePageTemplate = ({ data }) => {
+const IssuesPageTemplate = ({ data }) => {
   const { wpIssue } = data;
   return (
    <Layout>
 
-   <h1>test</h1>
+   <h1>{wpIssue.title}</h1>
 
     </Layout>
   )
 }
-export default PagePageTemplate;
+export default IssuesPageTemplate;
 
 export const pageQuery = graphql`
 
-query PagePageByType($id: String) {
+query IssuesPageTemplate($id: String) {
    wpIssue(id: {eq: $id}) {
       id
       link

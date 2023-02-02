@@ -53,7 +53,7 @@ exports.createPages = async({actions, graphql, reporter}) => {
     let template = require.resolve(`./src/templates/WpArticle.js`);
     let contTemplate = require.resolve(`./src/templates/WpContributor.js`);
     let pageTemplate = require.resolve(`./src/templates/WpPage.js`);
-    let issuesTemplate = require.resolve(`./src/templates/WpIssues.js`)
+    let issuesPageTemplate = require.resolve(`./src/templates/WpIssues.js`)
 
     allWpArticle.nodes.map( post => {
         actions.createPage({
@@ -80,7 +80,7 @@ exports.createPages = async({actions, graphql, reporter}) => {
     allWpIssue.nodes.map( issue => {
       actions.createPage({
           path: issue.uri,
-          component: issuesTemplate,
+          component: issuesPageTemplate,
           context: issue
       })
   })

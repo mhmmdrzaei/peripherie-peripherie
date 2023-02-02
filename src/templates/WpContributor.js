@@ -5,7 +5,7 @@ import {graphql } from "gatsby";
 import Layout from '../components/layout/layout.component'
 
 
-const CategoryPageTemplate = ({ data }) => {
+const ContribotorPageTemplate = ({ data }) => {
   const { wpContributor } = data;
   return (
    <Layout>
@@ -15,7 +15,7 @@ const CategoryPageTemplate = ({ data }) => {
 }
 
 
-export default CategoryPageTemplate;
+export default ContribotorPageTemplate;
 
 export const pageQuery = graphql`
 
