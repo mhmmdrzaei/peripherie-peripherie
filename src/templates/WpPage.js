@@ -2,7 +2,7 @@ import React from "react"
 import {graphql} from "gatsby";
 // import { Helmet } from "react-helmet/es/Helmet";
 import Layout from '../components/layout/layout.component'
-// import HomePage from '../components/homePage/homePage.component'
+import HomePage from '../components/homepage/homepage.component'
 
 const PagePageTemplate = ({ data }) => {
   const { wpPage } = data;
@@ -22,7 +22,7 @@ const PagePageTemplate = ({ data }) => {
   return (
    <Layout>
    
-   {/* {pageLayout()} */}
+   {pageLayout()}
    <h1>test</h1>
 
     </Layout>

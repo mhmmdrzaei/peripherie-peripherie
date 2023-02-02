@@ -5,24 +5,10 @@ import Layout from '../components/layout/layout.component'
 import HomePage from '../components/homePage/homePage.component'
 
 const PagePageTemplate = ({ data }) => {
-  const { wpPage } = data;
-  // const pageLayout =()=> {
-  // //  if(wpPage.id ==='cG9zdDoxMTA=') {
-  // //     return (<HomePage />)
-  // //   } else return (
-  // //     <>
-  // //     <h1>{wpPage.title}</h1>
-  // //     <div dangerouslySetInnerHTML={{ __html: wpPage.content }} />
-
-  // //     </>
-
-
-  // //     )
-  // }
+  const { wpIssue } = data;
   return (
    <Layout>
-   
-   {/* {pageLayout()} */}
+
    <h1>test</h1>
 
     </Layout>
@@ -37,7 +23,6 @@ query PagePageByType($id: String) {
       id
       link
       title
-      content
     
   }
 }

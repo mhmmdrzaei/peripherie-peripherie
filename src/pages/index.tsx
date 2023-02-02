@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import Layout from "../components/layout/layout.component"
-import HomePage from '../components/homepage/homepage.compoent'
+import HomePage from '../components/homepage/homepage.component'
 
 const IndexPage = () => (
   <Layout>
