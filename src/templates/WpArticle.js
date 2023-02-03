@@ -9,7 +9,7 @@ const WpPost = ({ data }) => {
     const { wpArticle } = data;
     return(
         <Layout key={wpArticle.contentType.node.id} >
-          <h1>TestArticle</h1>
+          <h1>{wpArticle.title}</h1>
         </Layout>
 
     )

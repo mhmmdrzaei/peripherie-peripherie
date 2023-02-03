@@ -2,7 +2,6 @@ import React from "react"
 import {graphql} from "gatsby";
 // import { Helmet } from "react-helmet/es/Helmet";
 import Layout from '../components/layout/layout.component'
-import HomePage from '../components/homePage/homePage.component'
 
 const IssuesPageTemplate = ({ data }) => {
   const { wpIssue } = data;

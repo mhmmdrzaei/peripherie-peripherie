@@ -4,7 +4,7 @@ import React from "react"
 
 const HomePage: React.FC = () => {
   const homePageData = useStaticQuery(graphql`
-  query PagePageByType {
+  query hpd {
     wpPage(id: {eq: "cG9zdDo3MA=="}) {
       id
       link
@@ -22,7 +22,7 @@ const HomePage: React.FC = () => {
     <>
       <section id="home">
         <h1>{homePageData.wpPage.title}</h1>
-        <p>Welcome to the Home page.</p>
+        <div  dangerouslySetInnerHTML={{__html: homePageData.wpPage.content }} />
       </section>
       <section id="contributors">
         <h1>Contributors</h1>
