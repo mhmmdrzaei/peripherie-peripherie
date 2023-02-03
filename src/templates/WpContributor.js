@@ -19,24 +19,23 @@ export default ContribotorPageTemplate;
 
 export const pageQuery = graphql`
 
-query MyQuery {
-  allWpContributor {
-    nodes {
-      id
-      slug
-      uri
-      contributors {
-        contributorBio
-        fieldGroupName
-        featuredIn {
-          ... on WpIssue {
-            id
-            uri
-            title
-          }
+query PostById($id: String) {
+  wpContributor(id: {eq: $id}) {
+    title
+    id
+    uri
+    contributors {
+      contributorBio
+      featuredIn {
+        ... on wpIssue {
+          id
+          title
+          uri
         }
       }
+      fieldGroupName
     }
+    databaseId
   }
 }
 
