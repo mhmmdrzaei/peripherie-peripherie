@@ -20,14 +20,6 @@ exports.createPages = async({actions, graphql, reporter}) => {
               __typename
             }
           }
-          allWpPage {
-            nodes {
-              __typename
-              id
-              uri
-              databaseId
-            }
-          }
           allWpIssue {
             nodes {
               databaseId
@@ -43,16 +35,13 @@ exports.createPages = async({actions, graphql, reporter}) => {
         reporter.error("There was an error fetching posts", result.errors)
     }
 
-    const { allWpContributor, allWpArticle, allWpPage, allWpIssue } = result.data;
-    // const { allWpArticle } =  result.data;
-    // const {allWpPage} = result.data;
+    const { allWpContributor, allWpArticle, allWpIssue } = result.data;
 
 
 
 
     let template = require.resolve(`./src/templates/WpArticle.js`);
     let contTemplate = require.resolve(`./src/templates/WpContributor.js`);
-    // let pageTemplate = require.resolve(`./src/templates/WpPage.js`);
     let issuesPageTemplate = require.resolve(`./src/templates/WpIssues.js`)
 
     allWpArticle.nodes.map( post => {
@@ -70,13 +59,6 @@ exports.createPages = async({actions, graphql, reporter}) => {
             context: cont
         })
     })
-    // allWpPage.nodes.map( page => {
-    //     actions.createPage({
-    //         path: page.uri,
-    //         component: pageTemplate,
-    //         context: page
-    //     })
-    // })
     allWpIssue.nodes.map( issue => {
       actions.createPage({
           path: issue.uri,

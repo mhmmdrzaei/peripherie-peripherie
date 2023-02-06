@@ -27,7 +27,7 @@ query PostById($id: String) {
     contributors {
       contributorBio
       featuredIn {
-        ... on wpIssue {
+        ... on WpIssue {
           id
           title
           uri

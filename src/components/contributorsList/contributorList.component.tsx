@@ -5,33 +5,27 @@ import React from 'react';
 
 
 const ContributorsList = () => {
-	const headerData = useStaticQuery(graphql`
+	const contributorsData = useStaticQuery(graphql`
 	query MyQuery {
         allWpContributor {
           nodes {
             id
             slug
             uri
-            contributors {
-              contributorBio
-              fieldGroupName
-              featuredIn {
-                ... on WpIssue {
-                  id
-                  uri
-                  title
-                }
-              }
-            }
+            title
           }
         }
       }
   `)
 	return (
 		<section className="contributors">
-            {
-
-            }
+      {contributorsData.allWpContributor.nodes.map(({uri, title, id}: {uri: string, title: string, id: string}) => {
+        return (
+          <Link to={uri} key={id}>
+            {title}
+          </Link>
+        );
+      })}
         </section>
 	)
 }
