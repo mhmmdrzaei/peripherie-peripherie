@@ -1,6 +1,7 @@
 import { graphql,useStaticQuery } from "gatsby"
 import React from "react"
 import ContributorsList from "../contributorsList/contributorList.component"
+import IssuesList from "../issuesList/issuesList.component"
 
 const HomePage: React.FC = () => {
   const homePageData = useStaticQuery(graphql`
@@ -32,6 +33,7 @@ const HomePage: React.FC = () => {
       <section id="issues">
         <h1>Issues</h1>
         <p>Check out our issues.</p>
+        <IssuesList />
       </section>
     </>
   )

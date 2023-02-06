@@ -3,10 +3,9 @@ import { useStaticQuery, graphql, Link } from "gatsby";
 import React from 'react';
 
 
-
 const ContributorsList = () => {
 	const contributorsData = useStaticQuery(graphql`
-	query MyQuery {
+	query ContQuery {
         allWpContributor {
           nodes {
             id
