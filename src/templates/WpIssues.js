@@ -6,37 +6,41 @@ import Layout from '../components/layout/layout.component'
 const IssuesPageTemplate = ({ data }) => {
   const [showData, setShowData] = useState(false)
   const { wpIssue } = data;
-  console.log(wpIssue.issuePages.linkArticles)
+  console.log(wpIssue.issuePages.publicationPdfUpload)
   return (
    <Layout>
-    <section className="landingPage">
     {!showData && (
-      <img src={wpIssue.featuredImage.node.mediaItemUrl} alt={wpIssue.featuredImage.node.altText} id={wpIssue.featuredImage.node.id}/>
+      <section className="landingPage">
+        <img src={wpIssue.featuredImage.node.mediaItemUrl} alt={wpIssue.featuredImage.node.altText} id={wpIssue.featuredImage.node.id}/>
+        <div className="landingDetails">
+          <h1>{wpIssue.title}</h1>
+          <div  dangerouslySetInnerHTML={{__html: wpIssue.issuePages.issueDetails }} />
+          <div className="issueContributors">
+              <span>Featuring Works By:</span>
+              {wpIssue.issuePages.issueContributors.map(({contributorName}) => {
+                  return (
+                      <Link to={contributorName.uri} id={contributorName.id}>{contributorName.title}</Link>
+                  )
+              })}
+          </div>
+          <div>
+            <a href={wpIssue.issuePages.publicationPdfUpload.publicUrl} target="_blank" rel="noreferrer"s>Download this Isssue as a PDF</a>
+          </div>
+        </div>
+        <div className="landingIndex">
+            {wpIssue.issuePages.linkArticles.map(({listingOfArticles}) => {
+                  return (
+                    <ul>
+                      <li onClick={() => setShowData(!showData)} id={listingOfArticles.id}>{listingOfArticles.title}</li>
+                    </ul>
+                  )
+              })}
+        </div>
+      </section>
     )}
-   <div className="landingDetails">
-      <h1>{wpIssue.title}</h1>
-      <div  dangerouslySetInnerHTML={{__html: wpIssue.issuePages.issueDetails }} />
-      <div className="issueContributors">
-          <span>Featuring Works By:</span>
-          {wpIssue.issuePages.issueContributors.map(({contributorName}) => {
-              return (
-                  <Link to={contributorName.uri} id={contributorName.id}>{contributorName.title}</Link>
-              )
-          })}
-      </div>
-      <div className="landingIndex">
-        {wpIssue.issuePages.linkArticles.map(({listingOfArticles}) => {
-              return (
-                <ul>
-                  <li onClick={() => setShowData(!showData)} id={listingOfArticles.id}>{listingOfArticles.title}</li>
-                </ul>
-              )
-          })}
-      </div>
-      
-    </div>
-
-    </section>
+    {showData && (
+      <h1>test</h1>
+    )}
 
     
 
