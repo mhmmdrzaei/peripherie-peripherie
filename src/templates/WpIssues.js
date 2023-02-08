@@ -1,16 +1,19 @@
-import React from "react"
+import React, {useState} from "react"
 import {graphql, Link} from "gatsby";
 // import { Helmet } from "react-helmet/es/Helmet";
 import Layout from '../components/layout/layout.component'
 
 const IssuesPageTemplate = ({ data }) => {
+  const [showData, setShowData] = useState(false)
   const { wpIssue } = data;
   console.log(wpIssue.issuePages.linkArticles)
   return (
    <Layout>
     <section className="landingPage">
-    <img src={wpIssue.featuredImage.node.mediaItemUrl} alt={wpIssue.featuredImage.node.altText} id={wpIssue.featuredImage.node.id}/>
-    <div className="landingDetails">
+    {!showData && (
+      <img src={wpIssue.featuredImage.node.mediaItemUrl} alt={wpIssue.featuredImage.node.altText} id={wpIssue.featuredImage.node.id}/>
+    )}
+   <div className="landingDetails">
       <h1>{wpIssue.title}</h1>
       <div  dangerouslySetInnerHTML={{__html: wpIssue.issuePages.issueDetails }} />
       <div className="issueContributors">
@@ -25,7 +28,7 @@ const IssuesPageTemplate = ({ data }) => {
         {wpIssue.issuePages.linkArticles.map(({listingOfArticles}) => {
               return (
                 <ul>
-                  <li id={listingOfArticles.id}>{listingOfArticles.title}</li>
+                  <li onClick={() => setShowData(!showData)} id={listingOfArticles.id}>{listingOfArticles.title}</li>
                 </ul>
               )
           })}
