@@ -39,7 +39,7 @@ const IssuesPageTemplate = ({ data }) => {
       </section>
     )}
     {showData && (
-      <h1>test</h1>
+      <h1>tesdst</h1>
     )}
 
     
