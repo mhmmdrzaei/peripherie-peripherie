@@ -39,7 +39,23 @@ const IssuesPageTemplate = ({ data }) => {
       </section>
     )}
     {showData && (
-      <h1>tesdst</h1>
+            <section className="issueMenu">
+            <div className="issuedetails">
+              <h1>{wpIssue.title}</h1>
+              <div>
+                <a href={wpIssue.issuePages.publicationPdfUpload.publicUrl} target="_blank" rel="noreferrer"s>Download this Isssue as a PDF</a>
+              </div>
+            </div>
+            <div className="landingIndex">
+                {wpIssue.issuePages.linkArticles.map(({listingOfArticles}) => {
+                      return (
+                        <ul>
+                          <li onClick={() => setShowData(!showData)} id={listingOfArticles.id}>{listingOfArticles.title}</li>
+                        </ul>
+                      )
+                  })}
+            </div>
+          </section>
     )}
 
     
