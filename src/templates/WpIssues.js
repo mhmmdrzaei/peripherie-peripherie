@@ -42,7 +42,7 @@ const IssuesPageTemplate = ({ data }) => {
             <section className="issueMenu">
             <div className="issuedetails">
               <h1>{wpIssue.title}</h1>
-              <div>
+              <div className="pdfDownload">
                 <a href={wpIssue.issuePages.publicationPdfUpload.publicUrl} target="_blank" rel="noreferrer"s>Download this Isssue as a PDF</a>
               </div>
             </div>
