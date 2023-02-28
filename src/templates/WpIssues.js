@@ -4,18 +4,34 @@ import {graphql, Link} from "gatsby";
 import Layout from '../components/layout/layout.component'
 
 const IssuesPageTemplate = ({ data }) => {
-  const [showData, setShowData] = useState(false)
-  const { wpIssue } = data;
-  console.log(wpIssue.issuePages.publicationPdfUpload)
+  const [selectedArticle, setSelectedArticle] = useState(null)
+  const { wpIssue } = data
+
+  const handleArticleClick = articleId => {
+    setSelectedArticle(articleId)
+  }
+
   return (
-   <Layout>
-    {!showData && (
-      <section className="landingPage">
-        <img src={wpIssue.featuredImage.node.mediaItemUrl} alt={wpIssue.featuredImage.node.altText} id={wpIssue.featuredImage.node.id}/>
-        <div className="landingDetails">
-          <h1>{wpIssue.title}</h1>
-          <div  dangerouslySetInnerHTML={{__html: wpIssue.issuePages.issueDetails }} />
-          <div className="issueContributors">
+    <Layout>
+      <h1>{wpIssue.title}</h1>
+      <div className="pdfDownload">
+        <a href={wpIssue.issuePages.publicationPdfUpload.publicUrl} target="_blank" rel="noreferrer">Download this Issue as a PDF</a>
+      </div>
+      <div className="landingIndex">
+            {wpIssue.issuePages.linkArticles.map(({ listingOfArticles }) => {
+              return (
+                <ul key={listingOfArticles.id}>
+                  <li onClick={() => handleArticleClick(listingOfArticles.id)}>
+                    {listingOfArticles.title}
+                  </li>
+                </ul>
+              )
+            })}
+          </div>
+      {!selectedArticle ? (
+        <section className="landingPage">
+           <img src={wpIssue.featuredImage.node.mediaItemUrl} alt={wpIssue.featuredImage.node.altText} id={wpIssue.featuredImage.node.id}/>
+           <div className="issueContributors">
               <span>Featuring Works By:</span>
               {wpIssue.issuePages.issueContributors.map(({contributorName}) => {
                   return (
@@ -23,48 +39,39 @@ const IssuesPageTemplate = ({ data }) => {
                   )
               })}
           </div>
-          <div>
-            <a href={wpIssue.issuePages.publicationPdfUpload.publicUrl} target="_blank" rel="noreferrer"s>Download this Isssue as a PDF</a>
+
+          
+          {/* ... */}
+
+        </section>
+      ) : (
+        <section className="issueMenu">
+          {/* ... */}
+          <div className="landingIndex">
+            <ul key={selectedArticle}>
+              <li onClick={() => setSelectedArticle(null)}>Back</li>
+            </ul>
+            {wpIssue.issuePages.linkArticles.map(({ listingOfArticles }) => {
+              if (listingOfArticles.id === selectedArticle) {
+                return (
+                  <article key={listingOfArticles.id}>
+                    <h2>{listingOfArticles.title}</h2>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: listingOfArticles.content,
+                      }}
+                    />
+                  </article>
+                )
+              }
+            })}
           </div>
-        </div>
-        <div className="landingIndex">
-            {wpIssue.issuePages.linkArticles.map(({listingOfArticles}) => {
-                  return (
-                    <ul>
-                      <li onClick={() => setShowData(!showData)} id={listingOfArticles.id}>{listingOfArticles.title}</li>
-                    </ul>
-                  )
-              })}
-        </div>
-      </section>
-    )}
-    {showData && (
-            <section className="issueMenu">
-            <div className="issuedetails">
-              <h1>{wpIssue.title}</h1>
-              <div className="pdfDownload">
-                <a href={wpIssue.issuePages.publicationPdfUpload.publicUrl} target="_blank" rel="noreferrer"s>Download this Isssue as a PDF</a>
-              </div>
-            </div>
-            <div className="landingIndex">
-                {wpIssue.issuePages.linkArticles.map(({listingOfArticles}) => {
-                      return (
-                        <ul>
-                          <li onClick={() => setShowData(!showData)} id={listingOfArticles.id}>{listingOfArticles.title}</li>
-                        </ul>
-                      )
-                  })}
-            </div>
-          </section>
-    )}
-
-    
-
-    
-
+        </section>
+      )}
     </Layout>
   )
 }
+
 export default IssuesPageTemplate;
 
 export const pageQuery = graphql`
