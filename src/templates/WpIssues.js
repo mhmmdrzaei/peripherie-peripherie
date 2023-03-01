@@ -5,7 +5,7 @@ import Layout from '../components/layout/layout.component'
 
 const IssuesPageTemplate = ({ data }) => {
   const [selectedArticle, setSelectedArticle] = useState(null)
-  const { wpIssue } = data
+  const { wpIssue } = data;
 
   const handleArticleClick = articleId => {
     setSelectedArticle(articleId)
@@ -52,7 +52,9 @@ const IssuesPageTemplate = ({ data }) => {
               <li onClick={() => setSelectedArticle(null)}>Back</li>
             </ul>
             {wpIssue.issuePages.linkArticles.map(({ listingOfArticles }) => {
+              console.log({listingOfArticles})
               if (listingOfArticles.id === selectedArticle) {
+                
                 return (
                   <article key={listingOfArticles.id}>
                     <h2>{listingOfArticles.title}</h2>

@@ -42,7 +42,6 @@ const IssuesList = () => {
         }
       }
   `)
-  console.log(issuesData)
 	return (
 		<section className="contributors">
             {issuesData.allWpIssue.nodes.map(({uri, title, id, featuredImage, issuePages}: {uri: string, title: string, id: string, featuredImage:any, issuePages:any}) => {
