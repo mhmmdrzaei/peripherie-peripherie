@@ -3,7 +3,7 @@ import type { GatsbyConfig } from "gatsby";
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `Peripherie-Peripherie`,
-    siteUrl: `https://www.yourdomain.tld`
+    siteUrl: `https://peripherie.peripheralreview.com`
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
@@ -12,7 +12,7 @@ const config: GatsbyConfig = {
   plugins: [{
     resolve: 'gatsby-source-wordpress',
     options: {
-      "url": "http://localhost:8888/peripherie-peripherie/graphql"
+      "url": "https://peripherie.peripheralreview.com/back-end/graphql"
     }
   }, `gatsby-plugin-catch-links`, "gatsby-plugin-image", "gatsby-plugin-sharp", "gatsby-transformer-sharp", "gatsby-plugin-sass", "gatsby-plugin-sitemap", {
     resolve: 'gatsby-plugin-manifest',
