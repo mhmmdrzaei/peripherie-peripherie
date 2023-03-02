@@ -58,22 +58,84 @@ const IssuesPageTemplate = ({ data }) => {
                 return (
                   <article key={listingOfArticles.id}>
                     <h2>{listingOfArticles.title}</h2>
+                    <div className="contributors">
                     {
-  listingOfArticles.articleFields.contributors.map((contributor)=> {
-    if (listingOfArticles.articleFields.contributors.length === 1) {
-      return <p key={contributor.contributorConnect[0].id}>Only one contributor: {contributor.contributorConnect[0].title}</p>
-    } else {
-      return(
-        contributor.contributorConnect.map((each)=> {
-          return <div className="contributors">
-            <p key={each.id}>{each.title}</p>
-          </div>
-        })
-      )
+                      listingOfArticles.articleFields.contributors.map((contributor)=> {
+                        if (listingOfArticles.articleFields.contributors.length === 1) {
+                          return <p key={contributor.contributorConnect[0].id}>Only one contributor: {contributor.contributorConnect[0].title}</p>
+                        } else {
+                          return(
+                            contributor.contributorConnect.map((each)=> {
+                              return <p key={each.id}>{each.title}</p>
+                             
+                            })
+                          )
 
-    }
-  })
-}
+                        }
+                      })
+                    }
+                    </div>
+                    <section className="postContent">
+                    {
+                      listingOfArticles.articleFields.pageLayout === "Single Page" ? (
+                        <div>
+                          {
+
+                          listingOfArticles.articleFields.pageLayoutFields.map(({fieldGroupName})=> {
+                                
+                                  if(fieldGroupName === "Article_Articlefields_PageLayoutFields_AudioFile") {
+                                      return (
+                                        <p>Audio</p>
+
+                                        )
+                                  }
+                                  if(fieldGroupName === "Article_Articlefields_PageLayoutFields_VideoAudioEmbedding") {
+
+                                      return (
+                                        <p>embedded</p>
+
+                                        )
+                                        
+
+                                  }
+                                  if(fieldGroupName === "Article_Articlefields_PageLayoutFields_ImageFullWidth") {
+
+                                    return (
+                                      <p>full width img</p>
+
+                                      )
+                                      
+
+                                }
+                                if(fieldGroupName === "Article_Articlefields_PageLayoutFields_TwoColumnLayout") {
+
+                                  return (
+                                    <p>columns</p>
+
+                                    )
+                                    
+
+                              }
+                              if(fieldGroupName === "Article_Articlefields_PageLayoutFields_FullWidthTextEditor") {
+
+                                return (
+                                  <p>full width</p>
+
+                                  )
+                                  
+
+                            }
+                                  else return [];
+
+                                
+                              })
+                              }
+                        </div>
+                      ) : listingOfArticles.articleFields.pageLayout === "Multi-Page" ? (
+                        <p>multiPage</p>
+                      ) : null
+                      }
+                    </section>
 
                     
                     <div
