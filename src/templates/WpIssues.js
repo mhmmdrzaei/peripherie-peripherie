@@ -3,6 +3,25 @@ import {graphql, Link} from "gatsby";
 // import { Helmet } from "react-helmet/es/Helmet";
 import Layout from '../components/layout/layout.component'
 
+export const COLUMN_SIZING_STYLES = {
+  "50% / 50%": "fiftyWidth",
+  "60% / 40%": "sixtyWiidth",
+  "40% / 60%": "fourtyWiidth",
+  "undefined": ''
+};
+export const COLUMN_ALIGNMENT_STYLES = {
+  "Top": "topAligned",
+  "Center": "centerAligned",
+  "Bottom": "bottomAligned",
+  "undefined": ''
+};
+export const COLUMN_ORDER = {
+  "Image / Text": "imageFirst",
+  "Text / Image": "textFirst",
+  "undefined": ''
+};
+
+
 const IssuesPageTemplate = ({ data }) => {
   const [selectedArticle, setSelectedArticle] = useState(null)
   const { wpIssue } = data;
@@ -14,6 +33,8 @@ const IssuesPageTemplate = ({ data }) => {
   let pageId = 1111;
 
   const [currentPage, setCurrentPage] = useState(0);
+
+  
 
 
   return (
@@ -86,45 +107,84 @@ const IssuesPageTemplate = ({ data }) => {
                         <div>
                           {
 
-                          listingOfArticles.articleFields.pageLayoutFields.map(({fieldGroupName})=> {
+                          listingOfArticles.articleFields.pageLayoutFields.map((singlePageFields)=> {
                                 
-                                  if(fieldGroupName === "Article_Articlefields_PageLayoutFields_AudioFile") {
-                                      return (
-                                        <p>Audio</p>
-
-                                        )
+                                  if(singlePageFields.fieldGroupName === "Article_Articlefields_PageLayoutFields_AudioFile") {
+                                    return (<>
+                                      <audio controls>
+                                       <source src={singlePageFields.audioFileUpload.mediaItemUrl} type={`audio/${singlePageFields.fileTypeLowecase}`}/>
+                                        Your browser does not support the audio element.
+                                      </audio>
+                                    
+                                    
+                                    </>)
                                   }
-                                  if(fieldGroupName === "Article_Articlefields_PageLayoutFields_VideoAudioEmbedding") {
+                                  if(singlePageFields.fieldGroupName === "Article_Articlefields_PageLayoutFields_VideoAudioEmbedding") {
 
                                       return (
-                                        <p>embedded</p>
+                                        <div  className="responsiveVideo" dangerouslySetInnerHTML={{ __html: singlePageFields.contentEmbedding }} />
 
                                         )
                                         
 
                                   }
-                                  if(fieldGroupName === "Article_Articlefields_PageLayoutFields_ImageFullWidth") {
+                                  if(singlePageFields.fieldGroupName === "Article_Articlefields_PageLayoutFields_ImageFullWidth") {
 
                                     return (
-                                      <p>full width img</p>
+                                      <figure >
+                                      <img loading="lazy" src={singlePageFields.imageFullWidthUpload.mediaItemUrl} alt={singlePageFields.imageFullWidthUpload.altText} />
+                                      
+                                    </figure>
 
                                       )
                                       
 
                                 }
-                                if(fieldGroupName === "Article_Articlefields_PageLayoutFields_TwoColumnLayout") {
+                                if(singlePageFields.fieldGroupName === "Article_Articlefields_PageLayoutFields_TwoColumnLayout") {
 
                                   return (
-                                    <p>columns</p>
 
-                                    )
+                                    <div className={`columnLayout ${COLUMN_SIZING_STYLES[singlePageFields.columnWidths]}`}>
+                                      {
+                                        singlePageFields.columnContentLaidOutFromLeftToRight.map((columns)=> {
+                                          if(columns.fieldGroupName==="Article_Articlefields_PageLayoutFields_TwoColumnLayout_ColumnContentLaidOutFromLeftToRight_TextText"){
+                                            return(
+                                              <>
+                            
+                                              <div  className={`leftColumn ${COLUMN_ALIGNMENT_STYLES[columns.textText.leftTextBox.alignBoxTo]}`} dangerouslySetInnerHTML={{ __html: columns.textText.leftTextBox.leftTextBoxContent }} />
+                                              <div  className={`rightColumn ${COLUMN_ALIGNMENT_STYLES[columns.textText.rightTextBox.alignBoxTo]}`} dangerouslySetInnerHTML={{ __html: columns.textText.rightTextBox.rightTextBoxContent }} />
+                                          
+                                              
+                                              </>
+                                            )
+                                          }
+                                          if(columns.fieldGroupName==="Article_Articlefields_PageLayoutFields_TwoColumnLayout_ColumnContentLaidOutFromLeftToRight_Image"){
+                                            return(
+                                              <div className={`imageTextColumn ${COLUMN_ORDER[columns.columnOrder]}`}>
+                                                <figure className={`imageColumn ${COLUMN_ALIGNMENT_STYLES[columns.imageColumn.alignImageTo]}`}>
+                                                  <img loading="lazy" src={columns.imageColumn.imageUpload.mediaItemUrl} alt= {columns.imageColumn.imageUpload.altText} />
+                                                </figure>
+                            
+                                              <div  className={`textColumn ${COLUMN_ALIGNMENT_STYLES[columns.textColumn.alignTextColumnTo]}`} dangerouslySetInnerHTML={{ __html: columns.textColumn.textColumnContent }} />
+                                          
+                                              
+                                              </div>
+                                            )
+                                          }
+                                          else return [];
+                
+                                        })
+                                      }
+                
+                                    </div>
+                                  )
                                     
 
                               }
-                              if(fieldGroupName === "Article_Articlefields_PageLayoutFields_FullWidthTextEditor") {
+                              if(singlePageFields.fieldGroupName === "Article_Articlefields_PageLayoutFields_FullWidthTextEditor") {
 
                                 return (
-                                  <p>full width</p>
+                                  <div className="fullWidthMultiParagraph" dangerouslySetInnerHTML={{__html: singlePageFields.fullWidthTextBox }} />
 
                                   )
                                   
@@ -151,19 +211,71 @@ const IssuesPageTemplate = ({ data }) => {
             <section className="pageContent">
               {multiPageLayoutFields.map((mplFields, mplIndex) => {
                 if (mplFields.fieldGroupName === 'Article_Articlefields_multiPageLayout_MultiPageLayoutFields_ImageFullWidth') {
-                  return <p key={mplIndex}>img</p>;
+                  return (
+                    <figure key={mplIndex}>
+                      <img loading="lazy" src={mplFields.imageFullWidthUpload.mediaItemUrl} alt={mplFields.imageFullWidthUpload.altText} />
+                      
+                    </figure>
+                   
+                  )
                 }
                 if (mplFields.fieldGroupName === 'Article_Articlefields_multiPageLayout_MultiPageLayoutFields_FullWidthTextEditor') {
-                  return <p key={mplIndex}>paragraph</p>;
+                  return (
+                    <div className="fullWidthMultiParagraph" key={mplIndex} dangerouslySetInnerHTML={{__html: mplFields.fullWidthTextBox }} />
+                  )
                 }
                 if (mplFields.fieldGroupName === 'Article_Articlefields_multiPageLayout_MultiPageLayoutFields_TwoColumnLayout') {
-                  return <p key={mplIndex}>column</p>;
+                  return (
+
+                    <div className={`columnLayout ${COLUMN_SIZING_STYLES[mplFields.columnWidths]}`}>
+                      {
+                        mplFields.columnContentLaidOutFromLeftToRight.map((columns)=> {
+                          if(columns.fieldGroupName==="Article_Articlefields_multiPageLayout_MultiPageLayoutFields_TwoColumnLayout_ColumnContentLaidOutFromLeftToRight_TextText"){
+                            return(
+                              <>
+            
+                              <div  className={`leftColumn ${COLUMN_ALIGNMENT_STYLES[columns.textText.leftTextBox.alignBoxTo]}`} dangerouslySetInnerHTML={{ __html: columns.textText.leftTextBox.leftTextBoxContent }} />
+                              <div  className={`rightColumn ${COLUMN_ALIGNMENT_STYLES[columns.textText.rightTextBox.alignBoxTo]}`} dangerouslySetInnerHTML={{ __html: columns.textText.rightTextBox.rightTextBoxContent }} />
+                          
+                              
+                              </>
+                            )
+                          }
+                          if(columns.fieldGroupName==="Article_Articlefields_multiPageLayout_MultiPageLayoutFields_TwoColumnLayout_ColumnContentLaidOutFromLeftToRight_Image"){
+                            return(
+                              <div className={`imageTextColumn ${COLUMN_ORDER[columns.columnOrder]}`}>
+                                <figure className={`imageColumn ${COLUMN_ALIGNMENT_STYLES[columns.imageColumn.alignImageTo]}`}>
+                                  <img loading="lazy" src={columns.imageColumn.imageUpload.mediaItemUrl} alt= {columns.imageColumn.imageUpload.altText} />
+                                </figure>
+            
+                              <div  className={`textColumn ${COLUMN_ALIGNMENT_STYLES[columns.textColumn.alignTextColumnTo]}`} dangerouslySetInnerHTML={{ __html: columns.textColumn.textColumnContent }} />
+                          
+                              
+                              </div>
+                            )
+                          }
+                          else return [];
+
+                        })
+                      }
+
+                    </div>
+                  )
                 }
                 if (mplFields.fieldGroupName === 'Article_Articlefields_multiPageLayout_MultiPageLayoutFields_VideoAudioEmbedding') {
-                  return <p key={mplIndex}>iframe</p>;
+                  return (
+                    <div  key={mplIndex} className="responsiveVideo" dangerouslySetInnerHTML={{ __html: mplFields.contentEmbedding }} />
+                  )
                 }
                 if (mplFields.fieldGroupName === 'Article_Articlefields_multiPageLayout_MultiPageLayoutFields_AudioFile') {
-                  return <p key={mplIndex}>audio</p>;
+                  return (<>
+                    <audio controls>
+                     <source src={mplFields.audioFileUpload.mediaItemUrl} type={`audio/${mplFields.fileTypeLowecase}`}/>
+                      Your browser does not support the audio element.
+                    </audio>
+                  
+                  
+                  </>)
                 }
                 return null;
               })}
@@ -243,22 +355,39 @@ query IssuesPageTemplate($id: String) {
                   columnWidths
                   fieldGroupName
                   columnContentLaidOutFromLeftToRight {
-                    ... on WpArticle_Articlefields_PageLayoutFields_TwoColumnLayout_ColumnContentLaidOutFromLeftToRight_Spacer {
+                    ... on WpArticle_Articlefields_PageLayoutFields_TwoColumnLayout_ColumnContentLaidOutFromLeftToRight_TextText {
                       fieldGroupName
-                      spacerHeight
-                    }
-                    ... on WpArticle_Articlefields_PageLayoutFields_TwoColumnLayout_ColumnContentLaidOutFromLeftToRight_Image {
-                      fieldGroupName
-                      imageUpload {
-                        altText
-                        id
-                        uri
-                        link
+                      textText {
+                        fieldGroupName
+                        leftTextBox {
+                          alignBoxTo
+                          fieldGroupName
+                          leftTextBoxContent
+                        }
+                        rightTextBox {
+                          alignBoxTo
+                          fieldGroupName
+                          rightTextBoxContent
+                        }
                       }
                     }
-                    ... on WpArticle_Articlefields_PageLayoutFields_TwoColumnLayout_ColumnContentLaidOutFromLeftToRight_Text {
+                    ... on WpArticle_Articlefields_PageLayoutFields_TwoColumnLayout_ColumnContentLaidOutFromLeftToRight_Image {
+                      columnOrder
                       fieldGroupName
-                      textInput
+                      imageColumn {
+                        alignImageTo
+                        fieldGroupName
+                        imageUpload {
+                          altText
+                          id
+                          mediaItemUrl
+                        }
+                      }
+                      textColumn {
+                        alignTextColumnTo
+                        fieldGroupName
+                        textColumnContent
+                      }
                     }
                   }
                 }
@@ -268,7 +397,7 @@ query IssuesPageTemplate($id: String) {
                     altText
                     id
                     link
-                    uri
+                    mediaItemUrl
                   }
                 }
                 ... on WpArticle_Articlefields_PageLayoutFields_VideoAudioEmbedding {
@@ -281,8 +410,7 @@ query IssuesPageTemplate($id: String) {
                   audioFileUpload {
                     altText
                     id
-                    link
-                    uri
+                    mediaItemUrl
                     title
                   }
                 }
@@ -299,16 +427,39 @@ query IssuesPageTemplate($id: String) {
                     columnWidths
                     fieldGroupName
                     columnContentLaidOutFromLeftToRight {
-                      ... on WpArticle_Articlefields_multiPageLayout_MultiPageLayoutFields_TwoColumnLayout_ColumnContentLaidOutFromLeftToRight_Spacer {
-                        fieldGroupName
-                        spacerHeight
-                      }
                       ... on WpArticle_Articlefields_multiPageLayout_MultiPageLayoutFields_TwoColumnLayout_ColumnContentLaidOutFromLeftToRight_Image {
                         fieldGroupName
+                        columnOrder
+                        imageColumn {
+                          alignImageTo
+                          fieldGroupName
+                          imageUpload {
+                            altText
+                            id
+                            mediaItemUrl
+                          }
+                        }
+                        textColumn {
+                          alignTextColumnTo
+                          fieldGroupName
+                          textColumnContent
+                        }
                       }
-                      ... on WpArticle_Articlefields_multiPageLayout_MultiPageLayoutFields_TwoColumnLayout_ColumnContentLaidOutFromLeftToRight_Text {
+                      ... on WpArticle_Articlefields_multiPageLayout_MultiPageLayoutFields_TwoColumnLayout_ColumnContentLaidOutFromLeftToRight_TextText {
                         fieldGroupName
-                        textInput
+                        textText {
+                          fieldGroupName
+                          leftTextBox {
+                            alignBoxTo
+                            fieldGroupName
+                            leftTextBoxContent
+                          }
+                          rightTextBox {
+                            alignBoxTo
+                            fieldGroupName
+                            rightTextBoxContent
+                          }
+                        }
                       }
                     }
                   }
@@ -331,7 +482,7 @@ query IssuesPageTemplate($id: String) {
                     audioFileUpload {
                       altText
                       link
-                      uri
+                      mediaItemUrl
                       title
                     }
                   }
@@ -353,5 +504,4 @@ query IssuesPageTemplate($id: String) {
     }
   }
 }
-
 `

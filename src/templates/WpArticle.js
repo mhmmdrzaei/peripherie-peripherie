@@ -53,27 +53,6 @@ query PostById($id: String) {
           ... on WpArticle_Articlefields_multiPageLayout_MultiPageLayoutFields_TwoColumnLayout {
             columnWidths
             fieldGroupName
-            columnContentLaidOutFromLeftToRight {
-              ... on WpArticle_Articlefields_multiPageLayout_MultiPageLayoutFields_TwoColumnLayout_ColumnContentLaidOutFromLeftToRight_Spacer {
-                fieldGroupName
-                spacerHeight
-              }
-              ... on WpArticle_Articlefields_multiPageLayout_MultiPageLayoutFields_TwoColumnLayout_ColumnContentLaidOutFromLeftToRight_Image {
-                fieldGroupName
-                imageUpload {
-                  altText
-                  caption
-                  id
-                  link
-                  publicUrl
-                  uri
-                }
-              }
-              ... on WpArticle_Articlefields_multiPageLayout_MultiPageLayoutFields_TwoColumnLayout_ColumnContentLaidOutFromLeftToRight_Text {
-                fieldGroupName
-                textInput
-              }
-            }
           }
           ... on WpArticle_Articlefields_multiPageLayout_MultiPageLayoutFields_ImageFullWidth {
             fieldGroupName
@@ -113,21 +92,7 @@ query PostById($id: String) {
         ... on WpArticle_Articlefields_PageLayoutFields_TwoColumnLayout {
           columnWidths
           fieldGroupName
-          columnContentLaidOutFromLeftToRight {
-            ... on WpArticle_Articlefields_PageLayoutFields_TwoColumnLayout_ColumnContentLaidOutFromLeftToRight_Spacer {
-              fieldGroupName
-              spacerHeight
-            }
-            ... on WpArticle_Articlefields_PageLayoutFields_TwoColumnLayout_ColumnContentLaidOutFromLeftToRight_Image {
-              fieldGroupName
-              imageUpload {
-                altText
-                id
-                link
-                caption
-              }
-            }
-          }
+        
         }
         ... on WpArticle_Articlefields_PageLayoutFields_ImageFullWidth {
           fieldGroupName
