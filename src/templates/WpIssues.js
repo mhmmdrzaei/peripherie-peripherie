@@ -11,6 +11,11 @@ const IssuesPageTemplate = ({ data }) => {
     setSelectedArticle(articleId)
   }
 
+  let pageId = 1111;
+
+  const [currentPage, setCurrentPage] = useState(0);
+
+
   return (
     <Layout>
       <h1>{wpIssue.title}</h1>
@@ -20,8 +25,8 @@ const IssuesPageTemplate = ({ data }) => {
       <div className="landingIndex">
             {wpIssue.issuePages.linkArticles.map(({ listingOfArticles }) => {
               return (
-                <ul key={listingOfArticles.id}>
-                  <li onClick={() => handleArticleClick(listingOfArticles.id)}>
+                <ul >
+                  <li onClick={() => handleArticleClick(listingOfArticles.id)} key={listingOfArticles.id}>
                     {listingOfArticles.title}
                   </li>
                 </ul>
@@ -132,17 +137,45 @@ const IssuesPageTemplate = ({ data }) => {
                               }
                         </div>
                       ) : listingOfArticles.articleFields.pageLayout === "Multi-Page" ? (
-                        <p>multiPage</p>
+                        <div>
+                        {listingOfArticles.articleFields.multiPageLayout.map(({pageLabel,multiPageLayoutFields}, index) => (
+        <div className="MultiPage" key={index}>
+          <section
+            className="multiPageTitle"
+            onClick={() => setCurrentPage(index)}
+            style={{ cursor: 'pointer' }}
+          >
+            {pageLabel}
+          </section>
+          {currentPage === index && (
+            <section className="pageContent">
+              {multiPageLayoutFields.map((mplFields, mplIndex) => {
+                if (mplFields.fieldGroupName === 'Article_Articlefields_multiPageLayout_MultiPageLayoutFields_ImageFullWidth') {
+                  return <p key={mplIndex}>img</p>;
+                }
+                if (mplFields.fieldGroupName === 'Article_Articlefields_multiPageLayout_MultiPageLayoutFields_FullWidthTextEditor') {
+                  return <p key={mplIndex}>paragraph</p>;
+                }
+                if (mplFields.fieldGroupName === 'Article_Articlefields_multiPageLayout_MultiPageLayoutFields_TwoColumnLayout') {
+                  return <p key={mplIndex}>column</p>;
+                }
+                if (mplFields.fieldGroupName === 'Article_Articlefields_multiPageLayout_MultiPageLayoutFields_VideoAudioEmbedding') {
+                  return <p key={mplIndex}>iframe</p>;
+                }
+                if (mplFields.fieldGroupName === 'Article_Articlefields_multiPageLayout_MultiPageLayoutFields_AudioFile') {
+                  return <p key={mplIndex}>audio</p>;
+                }
+                return null;
+              })}
+            </section>
+          )}
+        </div>
+      ))}
+                      </div>
                       ) : null
                       }
                     </section>
 
-                    
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: listingOfArticles.content,
-                      }}
-                    />
                   </article>
                 )
               }
