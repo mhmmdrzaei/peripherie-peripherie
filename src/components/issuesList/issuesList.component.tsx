@@ -1,7 +1,6 @@
 import { useStaticQuery, graphql, Link } from "gatsby";
 import React from 'react';
 import SingleIssue from "../singleIssue/singleIssue.component";
-import PasswordProtectedIssues from "../passwordProtected/passwordProtected.component";
 
 
 
@@ -45,19 +44,15 @@ const IssuesList = () => {
       }
   `)
 	return (
-<section className="contributors">
-  {issuesData.allWpIssue.nodes.map(
-    ({ uri, title, id, featuredImage, issuePages }: any) => {
-      return (
-        <PasswordProtectedIssues
-          key={id}
-          issuesData={{ uri, title, id, featuredImage, issuePages }}
-        />
-      );
-    }
-  )}
-</section>
+		<section className="contributors">
+            {issuesData.allWpIssue.nodes.map(({uri, title, id, featuredImage, issuePages}: {uri: string, title: string, id: string, featuredImage:any, issuePages:any}) => {
+            return (
+              <SingleIssue singleData={{uri, title, id, featuredImage, issuePages}}/>                
+  
 
+            );
+            })}
+        </section>
 	)
 }
  
