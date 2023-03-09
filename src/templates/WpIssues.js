@@ -3,6 +3,7 @@ import {graphql, Link} from "gatsby";
 // import { Helmet } from "react-helmet/es/Helmet";
 import Layout from '../components/layout/layout.component';
 import ArticleLayout from "../components/articleLayouts/articleLayout.component";
+import { v4 as uuidv4 } from 'uuid';
 
 
 
@@ -14,13 +15,8 @@ const IssuesPageTemplate = ({ data }) => {
     setSelectedArticle(articleId)
   }
 
-
-
-  
-
-
   return (
-    <Layout>
+    <Layout key={uuidv4()}>
       <h1>{wpIssue.title}</h1>
       <div className="pdfDownload">
         <a href={wpIssue.issuePages.publicationPdfUpload.publicUrl} target="_blank" rel="noreferrer">Download this Issue as a PDF</a>
@@ -28,11 +24,12 @@ const IssuesPageTemplate = ({ data }) => {
       <div className="landingIndex">
             {wpIssue.issuePages.linkArticles.map(({ listingOfArticles }) => {
               return (
-                <ul >
-                  <li onClick={() => handleArticleClick(listingOfArticles.id)} key={listingOfArticles.id}>
+                  <button 
+                  onClick={() => handleArticleClick(listingOfArticles.id)} 
+                  onKeyDown={() => handleArticleClick(listingOfArticles.id)} 
+                  key={uuidv4()}>
                     {listingOfArticles.title}
-                  </li>
-                </ul>
+                  </button>
               )
             })}
       </div>
@@ -43,7 +40,7 @@ const IssuesPageTemplate = ({ data }) => {
               <span>Featuring Works By:</span>
               {wpIssue.issuePages.issueContributors.map(({contributorName}) => {
                   return (
-                      <Link to={contributorName.uri} id={contributorName.id}>{contributorName.title}</Link>
+                      <Link to={contributorName.uri} key={contributorName.id} id={contributorName.id}>{contributorName.title}</Link>
                   )
               })}
           </div>
@@ -53,17 +50,29 @@ const IssuesPageTemplate = ({ data }) => {
         <section className="issueMenu">
           <div className="landingIndex">
             <ul key={selectedArticle}>
-              <li onClick={() => setSelectedArticle(null)}>Back</li>
+              <button
+              key={uuidv4()}
+              onClick={() => setSelectedArticle(null)}
+              onKeyDown={() => setSelectedArticle(null)}
+              >Back
+              </button>
             </ul>
             {wpIssue.issuePages.linkArticles.map(({ listingOfArticles }) => {
+              
               if (listingOfArticles.id === selectedArticle) {
                 
                 return (
-                  <ArticleLayout listingOfArticles={listingOfArticles} />
+                  <ArticleLayout key={uuidv4()} listingOfArticles={listingOfArticles} />
                  
                 )
               }
-            })}
+              return null; 
+             
+            })
+            
+            
+            }
+
           </div>
         </section>
       )}

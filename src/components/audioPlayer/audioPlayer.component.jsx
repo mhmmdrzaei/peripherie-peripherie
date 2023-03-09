@@ -4,12 +4,11 @@ const AudioPlayer = ({audioData})=> {
     return (
 
         <>
-            <audio controls>
+            <audio controls key={audioData.audioFileUpload.id}>
             <source src={audioData.audioFileUpload.mediaItemUrl} type={`audio/${audioData.fileTypeLowecase}`}/>
             Your browser does not support the audio element.
             </audio>
-                
-                
+            
         </>
     )
 }

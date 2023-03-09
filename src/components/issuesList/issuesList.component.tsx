@@ -46,7 +46,7 @@ const IssuesList = () => {
 		<section className="contributors">
             {issuesData.allWpIssue.nodes.map(({uri, title, id, featuredImage, issuePages}: {uri: string, title: string, id: string, featuredImage:any, issuePages:any}) => {
             return (
-                <section className="issueContainer" key={id}>
+                <section className="issueContainer" key={id}> 
                     <img src={featuredImage.node.mediaItemUrl} alt={featuredImage.node.altText} id={featuredImage.node.id}/>
                     <section className="issueDetails">
                         <Link to={uri} >

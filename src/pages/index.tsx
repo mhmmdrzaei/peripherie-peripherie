@@ -5,7 +5,7 @@ import HomePage from '../components/homepage/homepage.component'
 const IndexPage = () => (
   <Layout>
     <HomePage />
-  </Layout>
+  </Layout> 
 )
 
 export default IndexPage

@@ -2,6 +2,7 @@ import React from "react";
 import SinglePageArticle from "../singlePageArticle/singlePageArticle.component";
 import MultiPageArticle from "../multiPageArticle/multiPageArticle.component";
 import ContributorsArticles from "../contributorsArticles/contributorsArticles.component";
+import { v4 as uuidv4 } from 'uuid';
 
 const ArticleLayout = ({listingOfArticles})=> {
 
@@ -14,10 +15,10 @@ const ArticleLayout = ({listingOfArticles})=> {
         {
             listingOfArticles.articleFields.pageLayout === "Single Page" ? (
 
-                <SinglePageArticle listingOfArticles={listingOfArticles.articleFields.pageLayoutFields}/>
+                <SinglePageArticle key={uuidv4()} listingOfArticles={listingOfArticles.articleFields.pageLayoutFields}/>
                 
             ) : listingOfArticles.articleFields.pageLayout === "Multi-Page" ? (
-                <MultiPageArticle listingOfArticles={listingOfArticles.articleFields.multiPageLayout} />
+                <MultiPageArticle key={uuidv4()} listingOfArticles={listingOfArticles.articleFields.multiPageLayout} />
             
             ) : null
         }

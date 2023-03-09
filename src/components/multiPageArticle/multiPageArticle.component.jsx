@@ -1,26 +1,29 @@
 import React, {useState} from "react";
-import { COLUMN_ORDER, COLUMN_ALIGNMENT_STYLES, COLUMN_SIZING_STYLES } from "../stylingComponent/stylingComponent.component";
+import { v4 as uuidv4 } from 'uuid';
+
 import AudioPlayer from "../audioPlayer/audioPlayer.component";
 import ImageFrame from "../image/image.component";
 import Columns from "../columns/columns.component";
 const MultiPageArticle = ({listingOfArticles}) => {
     const [currentPage, setCurrentPage] = useState(0);
     return (
-        <div>
+        <div key={uuidv4()}>
             {listingOfArticles.map(({pageLabel,multiPageLayoutFields}, index) => (
             <div className="MultiPage" key={index}>
-            <section
+            <button
             className="multiPageTitle"
+            key={uuidv4()}
             onClick={() => setCurrentPage(index)}
+            onKeyDown={() => setCurrentPage(index)}
             style={{ cursor: 'pointer' }}
-            >
+            > 
             {pageLabel}
-            </section>
+            </button>
             {currentPage === index && (
             <section className="pageContent">
                 {multiPageLayoutFields.map((mplFields, mplIndex) => {
                 if (mplFields.fieldGroupName === 'Article_Articlefields_multiPageLayout_MultiPageLayoutFields_ImageFullWidth') {
-                    return ( <ImageFrame imageData={mplFields} /> )
+                    return (  <ImageFrame imageData={mplFields} key={uuidv4()}/> )
                 }
                 if (mplFields.fieldGroupName === 'Article_Articlefields_multiPageLayout_MultiPageLayoutFields_FullWidthTextEditor') {
                     return (
@@ -29,7 +32,7 @@ const MultiPageArticle = ({listingOfArticles}) => {
                 }
                 if (mplFields.fieldGroupName === 'Article_Articlefields_multiPageLayout_MultiPageLayoutFields_TwoColumnLayout') {
                     return (
-                        <Columns columnData={mplFields} />
+                        <Columns key={uuidv4()} columnData={mplFields} />
                     )
                 }
                 if (mplFields.fieldGroupName === 'Article_Articlefields_multiPageLayout_MultiPageLayoutFields_VideoAudioEmbedding') {
@@ -38,7 +41,7 @@ const MultiPageArticle = ({listingOfArticles}) => {
                     )
                 }
                 if (mplFields.fieldGroupName === 'Article_Articlefields_multiPageLayout_MultiPageLayoutFields_AudioFile') {
-                    return ( <AudioPlayer audioData={mplFields} /> )
+                    return ( <AudioPlayer key={uuidv4()} audioData={mplFields} /> )
                 }
                 return null;
                 })}

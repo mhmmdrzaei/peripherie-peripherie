@@ -23,7 +23,7 @@ const HomePage: React.FC = () => {
     <>
       <section id="home">
         <h1>{homePageData.wpPage.title}</h1>
-        <div  dangerouslySetInnerHTML={{__html: homePageData.wpPage.content }} />
+        <div  dangerouslySetInnerHTML={{__html: homePageData.wpPage.content }} /> 
       </section>
       <section id="contributors">
         <h1>Contributors</h1>

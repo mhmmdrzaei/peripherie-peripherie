@@ -5,7 +5,7 @@ const ImageFrame = ({imageData})=>{
 
         <figure key={imageData}>
         <img loading="lazy" src={imageData.imageFullWidthUpload.mediaItemUrl} alt={imageData.imageFullWidthUpload.altText} />
-        
+
     </figure>
 
     )

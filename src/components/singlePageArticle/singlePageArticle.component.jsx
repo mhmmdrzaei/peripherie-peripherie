@@ -1,34 +1,35 @@
 import React from "react";
-import { COLUMN_ORDER, COLUMN_ALIGNMENT_STYLES, COLUMN_SIZING_STYLES } from "../stylingComponent/stylingComponent.component";
+import { v4 as uuidv4 } from 'uuid';
+
 import AudioPlayer from "../audioPlayer/audioPlayer.component";
 import ImageFrame from "../image/image.component";
 import Columns from "../columns/columns.component";
 const SinglePageArticle = ({listingOfArticles})=>{
     return (
-        <div>
+        <div key={uuidv4()}>
         {
 
         listingOfArticles.map((singlePageFields)=> {
             
                 if(singlePageFields.fieldGroupName === "Article_Articlefields_PageLayoutFields_AudioFile") {
-                return ( <AudioPlayer audioData={singlePageFields} /> )
+                return ( <AudioPlayer key={uuidv4()} audioData={singlePageFields} /> )
                 }
                 if(singlePageFields.fieldGroupName === "Article_Articlefields_PageLayoutFields_VideoAudioEmbedding") {
 
                     return (
-                    <div  className="responsiveVideo" dangerouslySetInnerHTML={{ __html: singlePageFields.contentEmbedding }} />
+                    <div  key={uuidv4()} className="responsiveVideo" dangerouslySetInnerHTML={{ __html: singlePageFields.contentEmbedding }} />
 
                     )
                     
 
                 }
                 if(singlePageFields.fieldGroupName === "Article_Articlefields_PageLayoutFields_ImageFullWidth") {
-                return ( <ImageFrame imageData={singlePageFields} /> )
+                return ( <ImageFrame key={uuidv4()} imageData={singlePageFields} /> )
             }
             if(singlePageFields.fieldGroupName === "Article_Articlefields_PageLayoutFields_TwoColumnLayout") {
 
                 return (
-                <Columns columnData={singlePageFields} />
+                <Columns key={uuidv4()} columnData={singlePageFields} />
                 )
                 
 
@@ -36,7 +37,7 @@ const SinglePageArticle = ({listingOfArticles})=>{
             if(singlePageFields.fieldGroupName === "Article_Articlefields_PageLayoutFields_FullWidthTextEditor") {
 
             return (
-                <div className="fullWidthMultiParagraph" dangerouslySetInnerHTML={{__html: singlePageFields.fullWidthTextBox }} />
+                <div key={uuidv4()} className="fullWidthMultiParagraph" dangerouslySetInnerHTML={{__html: singlePageFields.fullWidthTextBox }} />
 
                 )
                 

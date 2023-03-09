@@ -11,7 +11,6 @@ const WpPost = ({ data }) => {
         <Layout key={wpArticle.contentType.node.id} >
           <h1>{wpArticle.title}</h1>
         </Layout>
-
     )
 }
 

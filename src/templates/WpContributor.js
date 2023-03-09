@@ -18,7 +18,7 @@ const ContribotorPageTemplate = ({ data }) => {
           return (
             <Link to={contributor.uri} key={contributor.id}>
               {contributor.title}
-            </Link>
+            </Link> 
           );
         })
       ) : null}
