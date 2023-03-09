@@ -1,5 +1,7 @@
 import { useStaticQuery, graphql, Link } from "gatsby";
 import React from 'react';
+import SingleIssue from "../singleIssue/singleIssue.component";
+import PasswordProtectedIssues from "../passwordProtected/passwordProtected.component";
 
 
 
@@ -43,36 +45,19 @@ const IssuesList = () => {
       }
   `)
 	return (
-		<section className="contributors">
-            {issuesData.allWpIssue.nodes.map(({uri, title, id, featuredImage, issuePages}: {uri: string, title: string, id: string, featuredImage:any, issuePages:any}) => {
-            return (
-                <section className="issueContainer" key={id}> 
-                    <img src={featuredImage.node.mediaItemUrl} alt={featuredImage.node.altText} id={featuredImage.node.id}/>
-                    <section className="issueDetails">
-                        <Link to={uri} >
-                            {title}
-                            </Link> 
-                        <div  dangerouslySetInnerHTML={{__html: issuePages.issueDetails }} />
-                        <div className="issueContributors">
-                            <span>Featuring Works By:</span>
-                            {issuePages.issueContributors.map(({contributorName}: {contributorName:any}) => {
-                                return (
-                                    <Link to={contributorName.uri} id={contributorName.id}>{contributorName.title}</Link>
-                                )
-                            })}
-                        </div>
-                    </section>
-                    <section className="issuePurchaseDetails">
-                    <div  dangerouslySetInnerHTML={{__html: issuePages.purchasePopUpInformationText }} />
-                    <a href={issuePages.linkToShop.url} target={issuePages.linkToShop.target}>{issuePages.linkToShop.title}</a>
-                    </section>
-                </section>
-                     
-  
+<section className="contributors">
+  {issuesData.allWpIssue.nodes.map(
+    ({ uri, title, id, featuredImage, issuePages }: any) => {
+      return (
+        <PasswordProtectedIssues
+          key={id}
+          issuesData={{ uri, title, id, featuredImage, issuePages }}
+        />
+      );
+    }
+  )}
+</section>
 
-            );
-            })}
-        </section>
 	)
 }
  
