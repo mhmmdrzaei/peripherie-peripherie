@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "gatsby";
-
+import { v4 as uuidv4 } from 'uuid';
 interface SingleIssueProps {
   singleData: {
     id: string;
@@ -34,14 +34,14 @@ interface SingleIssueProps {
 
 const SingleIssue: React.FC<SingleIssueProps> = ({ singleData }) => {
   return (
-    <section className="issueContainer" key={singleData.id}>
+    <section className="issueContainer" key={uuidv4()}>
       <img
         src={singleData.featuredImage.node.mediaItemUrl}
         alt={singleData.featuredImage.node.altText}
         id={singleData.featuredImage.node.id}
       />
       <section className="issueDetails">
-        <Link to={singleData.uri}>{singleData.title}</Link>
+        <Link to={singleData.uri} key={uuidv4()}>{singleData.title}</Link>
         <div
           dangerouslySetInnerHTML={{
             __html: singleData.issuePages.issueDetails,
@@ -60,7 +60,7 @@ const SingleIssue: React.FC<SingleIssueProps> = ({ singleData }) => {
               };
             }) => {
               return (
-                <Link to={uri} id={id}>
+                <Link to={uri} id={id} key={uuidv4()}>
                   {title}
                 </Link>
               );
@@ -69,12 +69,12 @@ const SingleIssue: React.FC<SingleIssueProps> = ({ singleData }) => {
         </div>
       </section>
       <section className="issuePurchaseDetails">
-        <div
+        <div key={uuidv4()}
           dangerouslySetInnerHTML={{
             __html: singleData.issuePages.purchasePopUpInformationText,
           }}
         />
-        <a
+        <a key={uuidv4()}
           href={singleData.issuePages.linkToShop.url}
           target={singleData.issuePages.linkToShop.target}
         >
