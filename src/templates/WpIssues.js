@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import {graphql, Link} from "gatsby";
 // import { Helmet } from "react-helmet/es/Helmet";
 import Layout from '../components/layout/layout.component';
@@ -10,13 +10,49 @@ import { v4 as uuidv4 } from 'uuid';
 const IssuesPageTemplate = ({ data }) => {
   const [selectedArticle, setSelectedArticle] = useState(null)
   const { wpIssue } = data;
+  const [password, setPassword] = useState('');
+  const [authenticated, setAuthenticated] = useState(false);
+  const allowedPasswords = ['password1', 'password2', 'password3']; // array of allowed passwords
+  useEffect(() => {
+    const storedPassword = window.localStorage.getItem('password');
+    if (allowedPasswords.includes(storedPassword)) {
+      setAuthenticated(true);
+    }
+  }, []);
+ const handleSubmit = (e) => {
+    e.preventDefault();
 
+    // Check if the password is correct
+    if (allowedPasswords.includes(password)) {
+      // Store the password in local storage
+      window.localStorage.setItem('password', password);
+      setAuthenticated(true);
+    } else {
+      alert('Invalid password!');
+    }
+  };
+  
   const handleArticleClick = articleId => {
     setSelectedArticle(articleId)
   }
+  if (!authenticated) {
+    return (
+      <div>
+        <h1>Password Protected Page</h1>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Password:
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          </label>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    );
+  }
+  else {
 
   return (
-    <Layout key={uuidv4()}>
+    <Layout>
       <h1>{wpIssue.title}</h1>
       <div className="pdfDownload">
         <a href={wpIssue.issuePages.publicationPdfUpload.publicUrl} target="_blank" rel="noreferrer">Download this Issue as a PDF</a>
@@ -78,6 +114,7 @@ const IssuesPageTemplate = ({ data }) => {
       )}
     </Layout>
   )
+          }
 }
 
 export default IssuesPageTemplate;
