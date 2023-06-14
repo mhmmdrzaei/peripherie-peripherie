@@ -1,7 +1,7 @@
 import { useStaticQuery, graphql, Link } from "gatsby";
+import { StaticImage } from "gatsby-plugin-image";
 
 import React from 'react';
-
 
 
 const Header = () => {
@@ -26,9 +26,25 @@ const Header = () => {
   `)
 	return (
 		<header>
+			<Link to="/">
+			<StaticImage
+              src="../../images/logo.svg"
+              alt={headerData.site.siteMetadata.title}
+              placeholder="blurred"
+              height='150'
+            />
+			</Link>
 		<nav>
-			  <Link to="/"> <h1>{headerData.site.siteMetadata.title}</h1></Link>
-			  <a href="https://www.peripheralreview.com/">Peripheral Review</a>
+			  
+			  <a href="https://www.peripheralreview.com/">Peripheral Review
+			  <StaticImage
+              src="../../images/arrow.svg"
+              alt={headerData.site.siteMetadata.title}
+              placeholder="blurred"
+              height='40'
+            />
+			  
+			  </a>
 
 			  <Link to="/#contributors">Contributors</Link>
 

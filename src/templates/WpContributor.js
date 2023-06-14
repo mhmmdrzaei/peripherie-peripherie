@@ -9,6 +9,7 @@ const ContribotorPageTemplate = ({ data }) => {
   const { wpContributor } = data;
   return (
    <Layout>
+    <section className="contributorPage container">
     <h2>{wpContributor.title}</h2>
     <div className="contBio" dangerouslySetInnerHTML={{__html: wpContributor.contributors.contributorBio }} />
     <section className="featuredIn">
@@ -25,6 +26,9 @@ const ContribotorPageTemplate = ({ data }) => {
 
       
     </section>
+
+    </section>
+
     </Layout>
   )
 }

@@ -23,17 +23,18 @@ const HomePage: React.FC = () => {
     <>
       <section id="home">
         <h1>{homePageData.wpPage.title}</h1>
-        <div  dangerouslySetInnerHTML={{__html: homePageData.wpPage.content }} /> 
+        <div className=" homepageInfo container">
+        
+        <div  className="" dangerouslySetInnerHTML={{__html: homePageData.wpPage.content }} /> 
+        <a  className="button" href="#issues">More &#x2193;</a>
+        </div>
+      </section>
+      <section id="issues">
+        <IssuesList />
       </section>
       <section id="contributors">
         <h1>Contributors</h1>
-        <p>Meet our contributors.</p>
         <ContributorsList />
-      </section>
-      <section id="issues">
-        <h1>Issues</h1>
-        <p>Check out our issues.</p>
-        <IssuesList />
       </section>
     </>
   )

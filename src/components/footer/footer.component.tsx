@@ -15,10 +15,10 @@ const Footer = ()=>{
 		`)
 	return(
 		<footer>
-		<span>
+		<p>
 		© {new Date().getFullYear()} 
           {` `}
-          {footerData.site.siteMetadata?.title}, a Peripheral Review Project.</span>
+          {footerData.site.siteMetadata?.title}, a Peripheral Review Project.</p>
 		</footer>
 		)
 }

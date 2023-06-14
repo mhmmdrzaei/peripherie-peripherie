@@ -32,11 +32,11 @@ interface ColumnData {
   
   const Columns: React.FC<{ columnData: ColumnData }> = ({ columnData }) => {
     return (
-      <div key={uuidv4()} className={`columnLayout ${COLUMN_SIZING_STYLES[columnData.columnWidths]}`}>
+      <div key={uuidv4()} className={`columnLayout`}>
         {columnData.columnContentLaidOutFromLeftToRight.map((columns) => {
           if (columns.fieldGroupName === 'Article_Articlefields_PageLayoutFields_TwoColumnLayout_ColumnContentLaidOutFromLeftToRight_TextText') {
             return (
-              <div key={uuidv4()} className="textTextColumn ">
+              <div key={uuidv4()} className={`textTextColumn ${COLUMN_SIZING_STYLES[columnData.columnWidths]}`}>
                 <div
                   key={uuidv4()}
                   className={`leftColumn ${COLUMN_ALIGNMENT_STYLES[columns.textText?.leftTextBox?.alignBoxTo ?? '']}`}
@@ -54,7 +54,7 @@ interface ColumnData {
             return (
               <div
                 key={uuidv4()}
-                className={`imageTextColumn ${COLUMN_ORDER[columns.columnOrder ?? '']}`}
+                className={`imageTextColumn ${COLUMN_ORDER[columns.columnOrder ?? '']}  ${COLUMN_SIZING_STYLES[columnData.columnWidths]}`}
               >
                 <figure
                   key={uuidv4()}

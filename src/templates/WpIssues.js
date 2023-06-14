@@ -4,38 +4,62 @@ import {graphql, Link} from "gatsby";
 import Layout from '../components/layout/layout.component';
 import ArticleLayout from "../components/articleLayouts/articleLayout.component";
 import { v4 as uuidv4 } from 'uuid';
+import { StaticImage } from "gatsby-plugin-image";
 
 
 
 const IssuesPageTemplate = ({ data }) => {
-  const [selectedArticle, setSelectedArticle] = useState(null)
+  const [selectedArticle, setSelectedArticle] = useState(null);
   const { wpIssue } = data;
 
   const handleArticleClick = articleId => {
-    setSelectedArticle(articleId)
-  }
+    setSelectedArticle(articleId);
+  };
 
   return (
     <Layout key={uuidv4()}>
-      <h1>{wpIssue.title}</h1>
-      <div className="pdfDownload">
-        <a href={wpIssue.issuePages.publicationPdfUpload.publicUrl} target="_blank" rel="noreferrer">Download this Issue as a PDF</a>
-      </div>
-      <div className="landingIndex">
-            {wpIssue.issuePages.linkArticles.map(({ listingOfArticles }) => {
-              return (
-                  <button 
-                  onClick={() => handleArticleClick(listingOfArticles.id)} 
-                  onKeyDown={() => handleArticleClick(listingOfArticles.id)} 
-                  key={uuidv4()}>
-                    {listingOfArticles.title}
-                  </button>
-              )
-            })}
-      </div>
+            <section className="upperPageNav">
+        <h1>{wpIssue.title}</h1>
+        <div className="pdfDownload">
+          <a href={wpIssue.issuePages.publicationPdfUpload.publicUrl} target="_blank" rel="noreferrer">
+            <StaticImage
+              src="../images/download.svg"
+              alt="download symbol"
+              placeholder="blurred"
+              height='25'
+            />
+            Download this Issue as a PDF
+          </a>
+        </div>
+        <div className="landingIndex">
+          <h2>Featured Works:</h2>
+          {wpIssue.issuePages.linkArticles.map(({ listingOfArticles }) => (
+            <button
+              onClick={() => handleArticleClick(listingOfArticles.id)}
+              onKeyDown={() => handleArticleClick(listingOfArticles.id)}
+              key={uuidv4()}
+              className={listingOfArticles.id === selectedArticle ? "activeButton" : ""}
+              dangerouslySetInnerHTML={{ __html: listingOfArticles.title }}
+            />
+          ))}
+        </div>
+      </section>
+
       {!selectedArticle ? (
         <section className="landingPage">
-           <img src={wpIssue.featuredImage.node.mediaItemUrl} alt={wpIssue.featuredImage.node.altText} id={wpIssue.featuredImage.node.id}/>
+         <article className="media-container">
+          <div className="book-wrapper">
+              <div className="book">
+                  <div className="book__front">
+                  <img src={wpIssue.featuredImage.node.mediaItemUrl} alt={wpIssue.featuredImage.node.altText} id={wpIssue.featuredImage.node.id}/>
+
+                  </div>
+                  <div className="book__paper"></div>
+                  <div class="book__back"></div>
+              </div>
+              <div className="book-shadow"></div>
+          </div>
+          </article>
            <div className="issueContributors">
               <span>Featuring Works By:</span>
               {wpIssue.issuePages.issueContributors.map(({contributorName}) => {

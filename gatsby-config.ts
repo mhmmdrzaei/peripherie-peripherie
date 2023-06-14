@@ -14,7 +14,7 @@ const config: GatsbyConfig = {
     options: {
       "url": "https://peripherie.peripheralreview.com/back-end/graphql"
     }
-  }, `gatsby-plugin-catch-links`, "gatsby-plugin-image", "gatsby-plugin-sharp", "gatsby-transformer-sharp", "gatsby-plugin-sass", "gatsby-plugin-sitemap", {
+  }, `gatsby-plugin-catch-links`, "gatsby-plugin-image",`gatsby-plugin-sass`, "gatsby-plugin-sharp", "gatsby-transformer-sharp", "gatsby-plugin-sass", "gatsby-plugin-sitemap", {
     resolve: 'gatsby-plugin-manifest',
     options: {
       "icon": "src/images/icon.png"

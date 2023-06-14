@@ -20,8 +20,8 @@ interface Article {
   
   const ArticleLayout: React.FC<Props> = ({listingOfArticles}) => {
     return (
-      <article key={listingOfArticles.id}>
-        <h2>{listingOfArticles.title}</h2>
+      <article key={listingOfArticles.id} className="singleArticle">
+        <h2 dangerouslySetInnerHTML={{ __html: listingOfArticles.title }} />
         <ContributorsArticles listingOfArticles={listingOfArticles} />
         <section className="postContent">
           {

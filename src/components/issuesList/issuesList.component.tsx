@@ -43,29 +43,47 @@ const IssuesList = () => {
       }
   `)
 	return (
-		<section className="contributors">
+		<section className="container">
             {issuesData.allWpIssue.nodes.map(({uri, title, id, featuredImage, issuePages}: {uri: string, title: string, id: string, featuredImage:any, issuePages:any}) => {
             return (
                 <section className="issueContainer" key={id}> 
-                    <img src={featuredImage.node.mediaItemUrl} alt={featuredImage.node.altText} id={featuredImage.node.id}/>
+                
+                <article className="media-container">
+                <div className="book-wrapper">
+                <div className="book">
+                <div className="book__front">
+                <Link to={uri} >
+                <img src={featuredImage.node.mediaItemUrl} alt={featuredImage.node.altText} id={featuredImage.node.id}/>
+                </Link>
+                </div>
+                <div className="book__paper"></div>
+                <div className="book__back"></div>
+                </div>
+                <div className="book-shadow"></div>
+                </div>
+                </article>
+                
+                
                     <section className="issueDetails">
-                        <Link to={uri} >
+                      <h2><Link to={uri} >
                             {title}
-                            </Link> 
+                            </Link> </h2>
+                        
                         <div  dangerouslySetInnerHTML={{__html: issuePages.issueDetails }} />
                         <div className="issueContributors">
-                            <span>Featuring Works By:</span>
+                            <h3>Featuring Works By:</h3>
                             {issuePages.issueContributors.map(({contributorName}: {contributorName:any}) => {
                                 return (
                                     <Link to={contributorName.uri} id={contributorName.id}>{contributorName.title}</Link>
                                 )
                             })}
                         </div>
-                    </section>
-                    <section className="issuePurchaseDetails">
+                        <section className="issuePurchaseDetails">
                     <div  dangerouslySetInnerHTML={{__html: issuePages.purchasePopUpInformationText }} />
                     <a href={issuePages.linkToShop.url} target={issuePages.linkToShop.target}>{issuePages.linkToShop.title}</a>
                     </section>
+                    </section>
+
                 </section>
                      
   
