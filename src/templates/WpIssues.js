@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import {graphql, Link} from "gatsby";
 // import { Helmet } from "react-helmet/es/Helmet";
 import Layout from '../components/layout/layout.component';
@@ -7,18 +7,57 @@ import { v4 as uuidv4 } from 'uuid';
 import { StaticImage } from "gatsby-plugin-image";
 
 
-
 const IssuesPageTemplate = ({ data }) => {
-  const [selectedArticle, setSelectedArticle] = useState(null);
+  const [selectedArticle, setSelectedArticle] = useState(null)
   const { wpIssue } = data;
+  const [password, setPassword] = useState('');
+  const [authenticated, setAuthenticated] = useState(false);
+  const allowedPasswords = [ 'password2', 'password3']; // array of allowed passwords
+  useEffect(() => {
+    const storedPassword = window.localStorage.getItem('password');
+    if (allowedPasswords.includes(storedPassword)) {
+      setAuthenticated(true);
+    }
+  }, []);
+ const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const handleArticleClick = articleId => {
-    setSelectedArticle(articleId);
+    // Check if the password is correct
+    if (allowedPasswords.includes(password)) {
+      // Store the password in local storage
+      window.localStorage.setItem('password', password);
+      setAuthenticated(true);
+    } else {
+      alert('Invalid password!');
+    }
   };
+  
+  const handleArticleClick = articleId => {
+    setSelectedArticle(articleId)
+  }
+  if (!authenticated) {
+    return (
+      <Layout>
+        <div className="passwordPage"> 
+        <h1>Password Protected Page</h1>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Password:
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          </label>
+          <button type="submit">Submit</button>
+        </form>
+        
+        </div>
+
+      </Layout>
+    );
+  }
+  else {
 
   return (
-    <Layout key={uuidv4()}>
-            <section className="upperPageNav">
+    <Layout>
+             <section className="upperPageNav">
         <h1>{wpIssue.title}</h1>
         <div className="pdfDownload">
           <a href={wpIssue.issuePages.publicationPdfUpload.publicUrl} target="_blank" rel="noreferrer">
@@ -44,22 +83,20 @@ const IssuesPageTemplate = ({ data }) => {
           ))}
         </div>
       </section>
-
       {!selectedArticle ? (
         <section className="landingPage">
-         <article className="media-container">
-          <div className="book-wrapper">
-              <div className="book">
-                  <div className="book__front">
-                  <img src={wpIssue.featuredImage.node.mediaItemUrl} alt={wpIssue.featuredImage.node.altText} id={wpIssue.featuredImage.node.id}/>
-
-                  </div>
-                  <div className="book__paper"></div>
-                  <div class="book__back"></div>
-              </div>
-              <div className="book-shadow"></div>
-          </div>
-          </article>
+                          <article className="media-container">
+                <div className="book-wrapper">
+                <div className="book">
+                <div className="book__front">
+                <img src={wpIssue.featuredImage.node.mediaItemUrl} alt={wpIssue.featuredImage.node.altText} id={wpIssue.featuredImage.node.id}/>
+                </div>
+                <div className="book__paper"></div>
+                <div className="book__back"></div>
+                </div>
+                <div className="book-shadow"></div>
+                </div>
+                </article>
            <div className="issueContributors">
               <span>Featuring Works By:</span>
               {wpIssue.issuePages.issueContributors.map(({contributorName}) => {
@@ -102,6 +139,7 @@ const IssuesPageTemplate = ({ data }) => {
       )}
     </Layout>
   )
+          }
 }
 
 export default IssuesPageTemplate;

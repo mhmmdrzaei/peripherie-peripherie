@@ -1,10 +1,16 @@
 import { useStaticQuery, graphql, Link } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
+import { useState } from "react";
 
 import React from 'react';
 
 
+
 const Header = () => {
+	const [navbarOpen, setNavbarOpen] = useState(false);
+	const handleToggle = () => {
+	  setNavbarOpen(!navbarOpen)
+	}
 	const headerData = useStaticQuery(graphql`
 	query HeaderQuery {
 	  site {
@@ -34,7 +40,9 @@ const Header = () => {
               height='150'
             />
 			</Link>
-		<nav>
+			<button onClick={handleToggle} className="mobileMenu">{navbarOpen ? "Close" : "Menu"}</button>
+      <nav className={`menuNav ${navbarOpen ? " showMenu" : ""}`}>
+
 			  
 			  <a href="https://www.peripheralreview.com/">Peripheral Review
 			  <StaticImage

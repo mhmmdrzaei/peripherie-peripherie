@@ -212,6 +212,7 @@ nav {
     align-items: top;
     min-height: 55vh;
     max-width: 900px;
+    padding: 0 2.5%;
     margin: 0 auto;
     padding-top: 20vh;
     h2 {
@@ -386,13 +387,6 @@ footer {
 
 }
 
-
-.imageTextColumn {
-
-
-
-}
-
 .fourtyWiidth {
     .leftColumn, .imageColumn{
         width: 39%;
@@ -467,4 +461,154 @@ audio {
 .postContent {
     padding-top: 30px;
     border-top: 1px solid black;
+}
+//menu 
+.mobileMenu {
+    display: none;
+}
+// password page 
+.passwordPage {
+    margin: 20vh auto;
+    max-width: 900px;
+    text-align: center;
+    padding: 0 2.5%;
+    min-height: 55vh;
+    background-image: url('../images/issuePage.svg');
+    form {
+        @include fontSize(15);
+        font-family: 'Open Sans', sans-serif;
+        button {
+            @extend .button;
+            margin-top: 20px;
+        }
+        input {
+            display: block;
+    margin: 20px auto 0;
+    width: 75%;
+    min-height: 37px;
+    border-radius: 0;
+    border: 1px solid black;
+        }
+    }
+
+
+}
+
+// media queries
+@media only screen and (max-width: 800px) {
+    .homepageInfo {
+        @include fontSize(14);
+    }
+}
+@media only screen and (max-width: 650px) {
+    .mobileMenu {
+        display: block;
+        background: transparent;
+        border: none;
+        font-family: 'Playfair Display', serif;
+        @include fontSize(17);
+        z-index:2;
+
+    }
+    nav a {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+    nav a:nth-child(1) {
+        margin-top: 50%;
+    }
+    header a:nth-child(1) {
+        z-index: 2;
+    }
+    .menuNav {
+        display: none;
+    }
+    .showMenu {
+        display: block;
+        position: fixed;
+    top: 0;
+    left: 0;
+    background: yellow;
+    width: 100%;
+    height: 100vh;
+    }
+
+    .homepageInfo {
+        @include fontSize(13);
+        padding: 20vh 4%;
+    }
+    .media-container, .issueDetails {
+        width: 100%;
+    }
+    .book {
+        margin: 0 auto;
+    }
+    .issueDetails {
+        text-align: center;
+    }
+    #contributors {
+        display: block;
+        text-align: center;
+    }
+    .issueContributors {
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .fiftyWidth {
+        .imageColumn, .textColumn, .leftColumn, .rightColumn {
+            width: 100%;
+        }
+        
+    }
+    .sixtyWiidth {
+    
+        .leftColumn, .imageColumn{
+            width: 100%;
+        }
+        .rightColumn, .textColumn{
+            width: 100%;
+        }
+        .textfirst {
+            .textColumn {
+                order:1;
+                width: 100%;
+    
+            }
+            .imageColumn{
+                order:2;
+                width: 100%;
+            }
+        }
+        
+    
+    }
+    
+    .fourtyWiidth {
+        .leftColumn, .imageColumn{
+            width: 100%;
+        }
+        .rightColumn, .textColumn{
+            width: 100%;
+        }
+        .textfirst {
+            .textColumn {
+                order:1;
+                width: 100%;
+    
+            }
+            .imageColumn{
+                order:2;
+                width: 100%;
+            }
+        }
+    
+    }
+
+}
+@media only screen and (max-width: 450px) {
+    .homepageInfo {
+        @include fontSize(11);
+    }
 }
