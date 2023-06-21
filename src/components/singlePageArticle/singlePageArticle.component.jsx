@@ -17,7 +17,11 @@ const SinglePageArticle = ({listingOfArticles})=>{
                 if(singlePageFields.fieldGroupName === "Article_Articlefields_PageLayoutFields_VideoAudioEmbedding") {
 
                     return (
-                    <div  key={uuidv4()} className="responsiveVideo" dangerouslySetInnerHTML={{ __html: singlePageFields.contentEmbedding }} />
+                    <div className="resonsiveVidParent">
+                        <div  key={uuidv4()} className="responsiveVideo" dangerouslySetInnerHTML={{ __html: singlePageFields.contentEmbedding }} />
+
+
+                    </div>
 
                     )
                     

@@ -18,10 +18,14 @@ const AudioPlayer: React.FC<Props>  = ({audioData})=> {
     return (
 
         <>
-            <audio controls key={audioData.audioFileUpload.id}>
+        <div className="audioParent">
+        <audio controls key={audioData.audioFileUpload.id}>
             <source src={audioData.audioFileUpload.mediaItemUrl} type={`audio/${audioData.fileTypeLowecase}`}/>
             Your browser does not support the audio element.
             </audio>
+
+        </div>
+
             
         </>
     )

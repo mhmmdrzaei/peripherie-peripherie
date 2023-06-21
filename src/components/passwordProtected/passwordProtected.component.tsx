@@ -3,7 +3,7 @@ import SingleIssue from "../singleIssue/singleIssue.component";
 
 const PasswordProtectedIssues: React.FC<{ issuesData: any }> = ({ issuesData }) => {
   const [password, setPassword] = useState("");
-  const correctPasswords = ["password1", "password2", "password3"]; // array of predetermined passwords
+  const correctPasswords = ["password6", "password4", "password5"]; // array of predetermined passwords
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

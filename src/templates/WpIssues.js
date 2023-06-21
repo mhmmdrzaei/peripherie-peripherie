@@ -12,7 +12,7 @@ const IssuesPageTemplate = ({ data }) => {
   const { wpIssue } = data;
   const [password, setPassword] = useState('');
   const [authenticated, setAuthenticated] = useState(false);
-  const allowedPasswords = [ 'password2', 'password3']; // array of allowed passwords
+  const allowedPasswords = [ 'password5', 'password3']; // array of allowed passwords
   useEffect(() => {
     const storedPassword = window.localStorage.getItem('password');
     if (allowedPasswords.includes(storedPassword)) {
@@ -98,7 +98,7 @@ const IssuesPageTemplate = ({ data }) => {
                 </div>
                 </article>
            <div className="issueContributors">
-              <span>Featuring Works By:</span>
+              <h3>Featuring Works By:</h3>
               {wpIssue.issuePages.issueContributors.map(({contributorName}) => {
                   return (
                       <Link to={contributorName.uri} key={contributorName.id} id={contributorName.id}>{contributorName.title}</Link>

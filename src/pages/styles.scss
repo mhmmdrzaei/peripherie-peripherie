@@ -439,10 +439,14 @@ footer {
         }
     }
 // audio 
-audio {
+
+.audioParent {
     width: 100%;
     margin: 0 auto 30px;
     max-width: 700px;
+    audio {
+        width: 100%;
+    }
 }
 // full width image {
   .postContent figure {
@@ -501,6 +505,12 @@ audio {
     }
 }
 @media only screen and (max-width: 650px) {
+    .container {
+        padding: 0 5%;
+    }
+    .contributorPage {
+        padding-top: 20vh;
+    }
     .mobileMenu {
         display: block;
         background: transparent;
@@ -552,7 +562,7 @@ audio {
         text-align: center;
     }
     .issueContributors {
-        margin: 0 auto;
+        margin: 30px auto;
         text-align: center;
     }
 
