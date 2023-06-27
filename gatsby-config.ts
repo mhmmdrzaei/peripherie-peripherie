@@ -4,6 +4,8 @@ const config: GatsbyConfig = {
   siteMetadata: {
     title: `Peripherie-Peripherie`,
     siteUrl: `https://peripherie.peripheralreview.com`
+    description: `peripherie-peripherie is an experimental thematic chapbook project produced by Peripheral Review, released bi-annually in Spring/Summer and Fall/Winter.`,
+    image: `images/icon.png`,
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin

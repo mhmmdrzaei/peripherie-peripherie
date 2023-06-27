@@ -12,7 +12,7 @@ const IssuesPageTemplate = ({ data }) => {
   const { wpIssue } = data;
   const [password, setPassword] = useState('');
   const [authenticated, setAuthenticated] = useState(false);
-  const allowedPasswords = [ 'password5', 'password3']; // array of allowed passwords
+  const allowedPasswords = [ 'password1', 'password3']; // array of allowed passwords
   useEffect(() => {
     const storedPassword = window.localStorage.getItem('password');
     if (allowedPasswords.includes(storedPassword)) {
@@ -40,9 +40,14 @@ const IssuesPageTemplate = ({ data }) => {
       <Layout>
         <div className="passwordPage"> 
         <h1>Password Protected Page</h1>
+        <section className="issuePurchaseDetails">
+          <div  dangerouslySetInnerHTML={{__html: wpIssue.issuePages.purchasePopUpInformationText }} />
+          <a href={wpIssue.issuePages.linkToShop.url} target={wpIssue.issuePages.linkToShop.target}>{wpIssue.issuePages.linkToShop.title}</a>
+        </section>
         <form onSubmit={handleSubmit}>
           <label>
-            Password:
+            <h3>Passcode:</h3>
+            
             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
           </label>
           <button type="submit">Submit</button>
@@ -335,6 +340,12 @@ query IssuesPageTemplate($id: String) {
             }
           }
         }
+      }
+      purchasePopUpInformationText
+      linkToShop {
+        url
+        title
+        target
       }
       publicationPdfUpload {
         altText
