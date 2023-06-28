@@ -2,6 +2,8 @@ import React from "react"
 import {graphql} from "gatsby";
 // import { Helmet } from "react-helmet/es/Helmet";
 import Layout from '../components/layout/layout.component'
+import { Seo } from "../components/seo/seo.component"
+
 
 
 
@@ -120,3 +122,6 @@ query PostById($id: String) {
   }
 }
 `;
+export const Head = () => (
+  <Seo />
+)

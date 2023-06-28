@@ -37,7 +37,7 @@ const Header = () => {
               src="../../images/logo.svg"
               alt={headerData.site.siteMetadata.title}
               placeholder="blurred"
-              height='150'
+              height={150}
             />
 			</Link>
 			<button onClick={handleToggle} className="mobileMenu">{navbarOpen ? "Close" : "Menu"}</button>
@@ -49,7 +49,7 @@ const Header = () => {
               src="../../images/arrow.svg"
               alt={headerData.site.siteMetadata.title}
               placeholder="blurred"
-              height='40'
+              height={40}
             />
 			  
 			  </a>

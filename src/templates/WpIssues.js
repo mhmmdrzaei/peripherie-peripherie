@@ -1,10 +1,12 @@
-import React, {useState, useEffect} from "react"
+import React, {useState, useEffect, useMemo} from "react"
 import {graphql, Link} from "gatsby";
 // import { Helmet } from "react-helmet/es/Helmet";
 import Layout from '../components/layout/layout.component';
 import ArticleLayout from "../components/articleLayouts/articleLayout.component";
 import { v4 as uuidv4 } from 'uuid';
 import { StaticImage } from "gatsby-plugin-image";
+import { Seo } from "../components/seo/seo.component"
+
 
 
 const IssuesPageTemplate = ({ data }) => {
@@ -12,14 +14,15 @@ const IssuesPageTemplate = ({ data }) => {
   const { wpIssue } = data;
   const [password, setPassword] = useState('');
   const [authenticated, setAuthenticated] = useState(false);
-  const allowedPasswords = [ 'password1', 'password3']; // array of allowed passwords
-  useEffect(() => {
-    const storedPassword = window.localStorage.getItem('password');
-    if (allowedPasswords.includes(storedPassword)) {
-      setAuthenticated(true);
-    }
-  }, []);
- const handleSubmit = (e) => {
+  const allowedPasswords = useMemo(() => ['password1', 'password2'], []);
+
+useEffect(() => {
+  const storedPassword = window.localStorage.getItem('password');
+  if (allowedPasswords.includes(storedPassword)) {
+    setAuthenticated(true);
+  }
+}, [allowedPasswords]);
+ const handleSubmit = (e) => { 
     e.preventDefault();
 
     // Check if the password is correct
@@ -45,7 +48,7 @@ const IssuesPageTemplate = ({ data }) => {
           <a href={wpIssue.issuePages.linkToShop.url} target={wpIssue.issuePages.linkToShop.target}>{wpIssue.issuePages.linkToShop.title}</a>
         </section>
         <form onSubmit={handleSubmit}>
-          <label>
+          <label htmlFor="passcode"> 
             <h3>Passcode:</h3>
             
             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
@@ -359,3 +362,7 @@ query IssuesPageTemplate($id: String) {
   }
 }
 `
+
+export const Head = () => (
+  <Seo />
+)

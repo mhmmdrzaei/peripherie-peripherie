@@ -80,7 +80,7 @@ a:nth-child(1){
 }
 nav {
     @extend .flex;
-    width: 80%;
+    width: 75%;
     a {
         width: 30%;
         color: black;
@@ -511,6 +511,22 @@ footer {
 
 
 }
+//404
+.errorPage {
+    text-align:center;
+    width: 100%;
+    min-height: 90vh;
+
+    h1 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+    }
+
+}
+
 
 // media queries
 @media only screen and (max-width: 800px) {
@@ -518,7 +534,7 @@ footer {
         @include fontSize(14);
     }
 }
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 820px) {
     .container {
         padding: 0 5%;
     }
@@ -558,10 +574,7 @@ footer {
     height: 100vh;
     }
 
-    .homepageInfo {
-        @include fontSize(13);
-        padding: 20vh 4%;
-    }
+
     .media-container, .issueDetails {
         width: 100%;
     }
@@ -628,6 +641,24 @@ footer {
             }
         }
     
+    }
+    .passwordPage  {
+        form {
+            display: block;
+            label {
+                display: block;
+                width: 100%;
+            }
+            input {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            button {
+                margin: 0;
+                margin-left: auto;
+                width: fit-content;
+            }
+        }
     }
 
 }

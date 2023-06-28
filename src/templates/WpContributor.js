@@ -3,6 +3,8 @@ import React from "react"
 import {graphql, Link } from "gatsby";
 // import { Helmet } from "react-helmet/es/Helmet";
 import Layout from '../components/layout/layout.component'
+import { Seo } from "../components/seo/seo.component"
+
 
 
 const ContribotorPageTemplate = ({ data }) => {
@@ -61,3 +63,6 @@ query PostById($id: String) {
 }
 
 `
+export const Head = () => (
+  <Seo />
+)
