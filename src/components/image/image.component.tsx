@@ -9,6 +9,11 @@ interface Image {
 }
 
 const ImageFrame: React.FC<{ imageData: Image }> = ({ imageData }) => {
+  if (!imageData.imageFullWidthUpload) {
+    // Render a placeholder or return null if there is no image data
+    return null;
+  }
+
   return (
     <figure key={imageData.imageFullWidthUpload.id}>
       <img

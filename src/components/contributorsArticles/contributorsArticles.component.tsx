@@ -20,7 +20,7 @@ const ContributorsArticles: React.FC<{ listingOfArticles: ContributorsList }> = 
     <div className="contributors">
       {listingOfArticles.articleFields.contributors.map((contributor) => {
         if (listingOfArticles.articleFields.contributors.length === 1) {
-          return <p key={contributor.contributorConnect[0].id}>Only one contributor: {contributor.contributorConnect[0].title}</p>
+          return <p key={contributor.contributorConnect[0].id}>{contributor.contributorConnect[0].title}</p>
         } else {
           return (
             contributor.contributorConnect.map((each) => {
