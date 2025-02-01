@@ -4,11 +4,7 @@ import Footer from "../footer/footer.component"
 import { Seo } from "../seo/seo.component"
 
 
-interface LayoutProps {
-  children: React.ReactNode;
-}
-
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout = ({ children }) => {
   return (
     <>
       <Header />

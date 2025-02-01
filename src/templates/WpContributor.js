@@ -40,7 +40,7 @@ export default ContribotorPageTemplate;
 
 export const pageQuery = graphql`
 
-query PostById($id: String) {
+query contributorsById($id: String) {
   wpContributor(id: {eq: $id}) {
     title
     id

@@ -1,20 +1,7 @@
 import React from "react";
 
-interface Audio {
-    
-    fileTypeLowecase: string;
-    audioFileUpload: {
-        mediaItemUrl:string;
-        id: string;
-    };
-            
 
-}
-interface Props {
-    audioData: Audio;
-  }
-
-const AudioPlayer: React.FC<Props>  = ({audioData})=> {
+const AudioPlayer  = ({audioData})=> {
     return (
 
         <>

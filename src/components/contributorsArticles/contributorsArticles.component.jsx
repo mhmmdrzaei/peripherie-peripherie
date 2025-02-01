@@ -1,21 +1,7 @@
 import React from "react";
 
-interface ContributorConnect {
-  id: string;
-  title: string;
-}
 
-interface Contributor {
-  contributorConnect: ContributorConnect[];
-}
-
-interface ContributorsList {
-  articleFields: {
-    contributors: Contributor[];
-  };
-}
-
-const ContributorsArticles: React.FC<{ listingOfArticles: ContributorsList }> = ({listingOfArticles}) => {
+const ContributorsArticles = ({listingOfArticles}) => {
   return (
     <div className="contributors">
       {listingOfArticles.articleFields.contributors.map((contributor) => {

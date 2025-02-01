@@ -1,6 +1,6 @@
 
 exports.createPages = async({actions, graphql, reporter}) => {
-
+ 
     const result = await graphql(`
         {
           allWpContributor {

@@ -5,7 +5,7 @@ import { Seo } from "../components/seo/seo.component"
 
 
 
-const NotFoundPage: React.FC<PageProps> = () => {
+const NotFoundPage = () => {
   return (
     <Layout>
       <div className="errorPage">

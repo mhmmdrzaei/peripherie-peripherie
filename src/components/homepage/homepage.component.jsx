@@ -3,7 +3,7 @@ import React from "react"
 import ContributorsList from "../contributorsList/contributorList.component"
 import IssuesList from "../issuesList/issuesList.component"
 
-const HomePage: React.FC = () => {
+const HomePage = () => {
   const homePageData = useStaticQuery(graphql`
   query hpd {
     wpPage(id: {eq: "cG9zdDo3MA=="}) {

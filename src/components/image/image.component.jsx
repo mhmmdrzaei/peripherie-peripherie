@@ -1,14 +1,8 @@
 import React from "react";
 
-interface Image {
-  imageFullWidthUpload: {
-    id: string;
-    mediaItemUrl: string;
-    altText: string;
-  };
-}
 
-const ImageFrame: React.FC<{ imageData: Image }> = ({ imageData }) => {
+
+const ImageFrame = ({ imageData }) => {
   if (!imageData.imageFullWidthUpload) {
     // Render a placeholder or return null if there is no image data
     return null;

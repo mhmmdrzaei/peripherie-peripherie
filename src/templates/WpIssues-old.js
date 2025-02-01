@@ -162,6 +162,11 @@ const IssuesPageTemplate = ({ data }) => {
           <h1>Password Protected Page</h1>
           <section className="issuePurchaseDetails">
             <div dangerouslySetInnerHTML={{__html: wpIssue.issuePages.purchasePopUpInformationText }} />
+            {
+              wpIssue.issuePages.linkToShop ? 
+              <a href={wpIssue.issuePages.linkToShop.url} target={wpIssue.issuePages.linkToShop.target}>{wpIssue.issuePages.linkToShop.title}</a>
+              : null
+            }
 
           </section>
           <form onSubmit={handleSubmit}>
@@ -274,8 +279,8 @@ export default IssuesPageTemplate;
 
 export const pageQuery = graphql`
 
-query IssuesPageTemplate($databaseId: Int) {
-  wpIssue(databaseId: {eq: $databaseId}) {
+query IssuesPageTemplate($id: String) {
+  wpIssue(id: {eq: $id}) {
     id
     link
     title

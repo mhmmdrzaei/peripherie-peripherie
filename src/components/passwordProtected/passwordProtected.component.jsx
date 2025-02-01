@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import SingleIssue from "../singleIssue/singleIssue.component";
 
-const PasswordProtectedIssues: React.FC<{ issuesData: any }> = ({ issuesData }) => {
+const PasswordProtectedIssues = ({ issuesData }) => {
   const [password, setPassword] = useState("");
   const correctPasswords = ["password6", "password4", "password5"]; // array of predetermined passwords
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     if (correctPasswords.includes(password)) {
       setPassword("");
@@ -17,7 +17,7 @@ const PasswordProtectedIssues: React.FC<{ issuesData: any }> = ({ issuesData }) 
       {correctPasswords.includes(password) ? (
         <section className="contributors">
           {issuesData.allWpIssue.nodes.map(
-            ({ uri, title, id, featuredImage, issuePages }: { uri: string; title: string; id: string; featuredImage: any; issuePages: any }) => {
+            ({ uri, title, id, featuredImage, issuePages }) => {
               return <SingleIssue singleData={{ uri, title, id, featuredImage, issuePages }} key={id} />;
             }
           )}

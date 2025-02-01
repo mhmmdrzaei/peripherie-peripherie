@@ -1,21 +1,10 @@
 import { useStaticQuery, graphql, Link } from "gatsby";
 import React from 'react';
 
-interface Contributor {
-  id: string;
-  slug: string;
-  uri: string;
-  title: string;
-}
 
-interface ContributorsData {
-  allWpContributor: {
-    nodes: Contributor[];
-  };
-}
 
-const ContributorsList: React.FC = () => {
-  const contributorsData: ContributorsData = useStaticQuery(graphql`
+const ContributorsList = () => {
+  const contributorsData = useStaticQuery(graphql`
     query ContQuery {
       allWpContributor {
         nodes {
