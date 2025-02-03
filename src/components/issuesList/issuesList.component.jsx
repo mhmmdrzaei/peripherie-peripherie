@@ -4,12 +4,13 @@ import React from "react";
 const IssuesList = () => {
   const issuesData = useStaticQuery(graphql`
     query IssuesQuery {
-      allWpIssue {
+      allWpIssue(sort: { fields: date, order: DESC }) {
         nodes {
           id
           slug
           uri
           title
+          date
           featuredImage {
             node {
               altText
