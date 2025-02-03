@@ -21,9 +21,14 @@ body {
 h1, h2, h3, h4{
     font-family: 'Playfair Display', serif; 
 }
-p, a {
+p, a, span, ul, ol {
     font-family: 'Open Sans', sans-serif;
 
+}
+ul, ol {
+    li {
+        margin-bottom: 15px !important;
+    }
 }
 a  {
     color: black;
@@ -292,7 +297,7 @@ footer {
     margin: 20vh auto 20px;
     max-width: 1400px;
     padding: 0 2.5%;
-    @extend .flex;
+    // @extend .flex;
     align-items: center;
 }
 .pdfDownload {
